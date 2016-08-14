@@ -1,6 +1,5 @@
-queue()
-    .defer(d3.json, "/api/data")
-    .await(makeGraphs);
+queue().defer(d3.json, "/api/data").await(makeGraphs);
+console.log("Queue method called inline");
 
 function makeGraphs(error, apiData) {
 
