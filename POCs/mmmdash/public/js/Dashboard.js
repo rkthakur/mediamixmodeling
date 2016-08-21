@@ -60,10 +60,12 @@ function makeGraphs(error, apiData) {
 	var projectsByNews = datePosted.group().reduceSum(function(d) {
 			return d.Newspaper;
 	});
+
+
 	//Define threshold values for data
 	var minDate = datePosted.bottom(1)[0].TDate;
 	var maxDate = datePosted.top(1)[0].TDate;
-
+  
     //Charts
 	var dateChart = dc.lineChart("#date-chart");
 
