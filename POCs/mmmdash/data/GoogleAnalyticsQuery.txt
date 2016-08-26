@@ -1,0 +1,16 @@
+
+Conversion Metrics : Quantity Checked out
+API Query URI
+https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A86833475&start-date=2016-01-01&end-date=yesterday&metrics=ga%3AquantityCheckedOut&dimensions=ga%3AproductSku%2Cga%3Adate&sort=-ga%3AquantityCheckedOut&start-index=1&max-results=10000&access_token=ya29.CjVGAw9c6_mUo56dh1vH0ps-Mwo6Hh41pV2MI93Ui_iGvHRxu7Q4a_ZggKhCO4Gvurs9eau-KQ
+Direct link to this Report
+https://ga-dev-tools.appspot.com/query-explorer/?ids=ga%3A86833475&start-date=2016-01-01&end-date=yesterday&metrics=ga%3AquantityCheckedOut&dimensions=ga%3AproductSku%2Cga%3Adate&sort=-ga%3AquantityCheckedOut&start-index=1&max-results=10000
+
+Impression: Product Detail Page View
+API Query URI
+https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A86833475&start-date=2016-01-01&end-date=yesterday&metrics=ga%3AproductDetailViews&dimensions=ga%3AproductSku&sort=-ga%3AproductDetailViews&start-index=1&max-results=10000&access_token=ya29.CjVGA49Xk43QFeeRGk0EQyBfla0cv8_eSNXU9a6TXe3Uof7uQ1iZOybD96PoURu5hiQ9OsNZRA
+Direct link to this Report
+https://ga-dev-tools.appspot.com/query-explorer/?ids=ga%3A86833475&start-date=2016-01-01&end-date=yesterday&metrics=ga%3AproductDetailViews&dimensions=ga%3AproductSku%2Cga%3Adate&sort=-ga%3AproductDetailViews&start-index=1&max-results=10000
+
+https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A86833475&start-date=2016-04-01&end-date=yesterday&metrics=ga%3AproductDetailViews&dimensions=ga%3AproductSku%2Cga%3Adate&sort=-ga%3AproductDetailViews&filters=ga%3AproductSku%3D%3D40059002399070001&start-index=1&max-results=10&access_token=ya29.CjVKAzuf0X7zgQp0ci60ygUlT8_XcNlkmfKkUuR_KmhR4qPhRpcJ13M7Gi3OenKxMCQahjBnsg
+
+https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A86833475&start-date=2016-04-01&end-date=yesterday&metrics=ga%3AproductDetailViews&dimensions=ga%3AproductSku%2Cga%3Adate&sort=-ga%3AproductDetailViews%2C-ga%3AproductSku&filters=ga%3AproductSku%3D%3D40059000977980001&start-index=1&max-results=10000&access_token=ya29.CjVKA0_HU0MOT_7WmT-kVFOQP1iZFEks4nNsQXjCoWSn4a85uwBrZ6jW8ewxyhuDpdYxjhwvhA

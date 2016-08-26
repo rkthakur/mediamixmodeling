@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import statsmodels.formula.api as smf
 # Connect mongodb
 client = MongoClient()
-client = MongoClient("mongodb://localhost:27017/mediaSampleDataing")
+client = MongoClient("mongodb://localhost:27017/")
 
 #load Sample date for media mix modeling
 db = client.mediamixmodeling
