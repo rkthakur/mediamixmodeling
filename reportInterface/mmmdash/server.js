@@ -7,9 +7,11 @@ var methodOverride = require('method-override');
 
 var session = require("express-session");
 app.use(session({ secret: '1234567890QWERTY' }));
-csv = require("ya-csv");
+//csv = require("ya-csv");
 var fs = require("fs");
 var multer = require("multer");
+var Converter = require("csvtojson").Converter;
+converter = new Converter({});
 upload = multer({
     dest: 'uploads/', rename: function (fieldname, filename) {
         console.log("sfasdsad " + fieldname);

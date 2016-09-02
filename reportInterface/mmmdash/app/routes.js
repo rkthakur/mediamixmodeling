@@ -1,6 +1,7 @@
 var Subjects = require('./models/SubjectViews');
 var Models = require('./models/ModelViews');
 var mongodb = require('mongodb');
+var fs = require('fs');
 var MongoClient = mongodb.MongoClient;
 var ObjectId = mongodb.ObjectID;
 module.exports = function(app) {
@@ -22,7 +23,7 @@ module.exports = function(app) {
 
  app.get('/api/modeldata', function(req, res) {
   // use mongoose to get all nerds in the database
-  Models.find({'isActive': 'YES'}, {'modelResult': 1}, function(err, modelDetails) {
+  Models.find({'isActive': 'YES'}, {'summary':1, 'modelResult': 1}, function(err, modelDetails) {
    // if there is an error retrieving, send the error.
        // nothing after res.send(err) will execute
    if (err)
@@ -42,44 +43,164 @@ app.post("/uploadfile", upload.single('uploadfile'), function (req, res, next) {
     MongoClient.connect(connectionCsvCollection, function (err, db) {
         console.log("DB is connect");
         //var _file = req.files.uploadfile;
-        var reader = csv.createCsvFileReader(req.file.path, { 'separator': ',' });
-        reader.addListener('data', function (data) {
-            if (Object.keys(_headerData).length == 0) {
-                for (var index in data) { _headerData[data[index]] = ""; }
+        var rs = fs.createReadStream(req.file.path);
+        var result = {};
+        converter.on("end_parsed", function (jsonObj) {
+            //console.log(jsonObj);
+            for (var newRowData in jsonObj) {
+                //console.log(typeof (jsonObj[newRowData].school_zip));
+                db.collection(req.session.collectionName).insert(jsonObj[newRowData]);
             }
-            else {
-                var newRowData = {};
-                var clmNO = 0;
-                var _keys = Object.keys(_headerData);
-                for (var index in data) {
-                    newRowData[_keys[clmNO]] = data[index];
-                    clmNO++;
-                }
-                if (err) {
-                    res.end('Unable to connect to the mongoDB server. Error:', err);
-                } else {
-                    if (Object.keys(_headerData).length == Object.keys(newRowData).length) {
-                        db.collection(req.session.collectionName).insert(newRowData);
-                        console.log("Row inserted: " + JSON.stringify(newRowData));
-                    }
-                }
-            }
-        });
-        reader.addListener('end', function (data) {
             db.close();
             res.writeHead(302, {
-                'Location': '/index.html'
-                //add other headers here...
+                'Location': 'http://localhost:8088'
+                // // //add other headers here...
             });
             res.end();
+
+        });
+
+        //record_parsed will be emitted each time a row has been parsed.
+        converter.on("record_parsed", function (resultRow, rawRow, rowIndex) {
+            for (var key in resultRow) {
+                if (!result[key] || !result[key] instanceof Array) {
+                    result[key] = [];
+                }
+                result[key][rowIndex] = resultRow[key];
+            }
+            //console.log(result);
+        });
+        rs.pipe(converter);
+    });
+});
+/*=========Upload File route Ends===========*/
+
+
+/*=========Data Grid routes starts=========*/
+app.get("/api/tabledata", function (req, res) {
+    var collectionName = "SampleData";
+    if (req.session.collectionName) {
+        collectionName = req.session.collectionName
+    } else {
+        req.session.collectionName = collectionName;
+    }
+    MongoClient.connect(connectionCsvCollection, function (err, db) {
+        var cursor = db.collection(collectionName).find();
+        var dataArray = [];
+        cursor.each(function (err, doc) {
+            //assert.equal(err, null);
+            if (doc != null) {
+                //console.log(doc);
+                dataArray.push(doc);
+            } else {
+                db.close();
+                res.send(dataArray);
+            }
         });
 
 
     });
+
 });
+app.post("/api/editTableData", function (req, res) {
+    console.log("In editTableData : " + JSON.stringify(req.body));
 
-/*=========Upload File route Ends*/
+    if (req.session.collectionName) {
+        MongoClient.connect(connectionCsvCollection, function (err, db) {
+            var _id = req.body._id;
+            delete req.body._id;
+            console.log(req.body);
+            db.collection(req.session.collectionName).update({ "_id": new ObjectId(_id) }, req.body, function (err, result) {
+                db.close();
+                res.send(result);
+            });
 
+
+        });
+
+    }
+
+
+});
+app.post("/api/deleteTableData", function (req, res) {
+    console.log("In deleteTableData : " + JSON.stringify(req.body));
+    if (req.session.collectionName) {
+        MongoClient.connect(connectionCsvCollection, function (err, db) {
+            var _id = req.body._id;
+            delete req.body._id;
+            console.log(req.body);
+            db.collection(req.session.collectionName).deleteOne({ "_id": new ObjectId(_id) }, function (err, result) {
+                db.close();
+                res.send(result);
+            });
+
+
+        });
+
+    }
+});
+app.post("/api/insertTableData", function (req, res) {
+    console.log("In insertTableData : " + JSON.stringify(req.body));
+    if (req.session.collectionName) {
+        MongoClient.connect(connectionCsvCollection, function (err, db) {
+            var _id = req.body._id;
+            delete req.body._id;
+            console.log(req.body);
+            db.collection(req.session.collectionName).insertOne(req.body, function (err, result) {
+                db.close();
+                res.send(result);
+            });
+
+
+        });
+
+    }
+});
+// frontend routes =========================================================
+//app.get('*', function (req, res) {
+//    res.sendfile('./public/login.html');
+//});
+app.post("/uploadfile", upload.single('uploadfile'), function (req, res, next) {
+
+    var dataArray = [];
+    var _headerData = {};
+    var _index = 0;
+    //var url = 'mongodb://localhost:27017';
+    req.session.collectionName = req.body.Collection == "" ? "MMMDb" : req.body.Collection;
+    MongoClient.connect(connectionCsvCollection, function (err, db) {
+        console.log("DB is connect");
+        //var _file = req.files.uploadfile;
+        var rs = fs.createReadStream(req.file.path);
+        var result = {};
+        converter.on("end_parsed", function (jsonObj) {
+            //console.log(jsonObj);
+            for (var newRowData in jsonObj) {
+                //console.log(typeof (jsonObj[newRowData].school_zip));
+                db.collection(req.session.collectionName).insert(jsonObj[newRowData]);
+            }
+            db.close();
+            res.writeHead(302, {
+                'Location': 'http://localhost:8088'
+                // // //add other headers here...
+            });
+            res.end();
+
+        });
+
+        //record_parsed will be emitted each time a row has been parsed.
+        converter.on("record_parsed", function (resultRow, rawRow, rowIndex) {
+            for (var key in resultRow) {
+                if (!result[key] || !result[key] instanceof Array) {
+                    result[key] = [];
+                }
+                result[key][rowIndex] = resultRow[key];
+            }
+            //console.log(result);
+        });
+        rs.pipe(converter);
+    });
+});
+/*=========Data Grid routes ends===========*/
 
  // frontend routes =========================================================
  app.get('*', function(req, res) {

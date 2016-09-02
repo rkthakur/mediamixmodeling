@@ -65,7 +65,7 @@ function makeGraphs(error, apiData) {
 	//Define threshold values for data
 	var minDate = datePosted.bottom(1)[0].TDate;
 	var maxDate = datePosted.top(1)[0].TDate;
-  
+
     //Charts
 	var dateChart = dc.lineChart("#date-chart");
 
@@ -75,17 +75,19 @@ function makeGraphs(error, apiData) {
 		.margins({top: 10, right: 50, bottom: 30, left: 50})
 		.dimension(datePosted)
 		.group(projectsByDate)
-		.renderArea(true)
+		.renderArea(false)
 		.transitionDuration(500)
 		.stack(projectsByTV)
 		.stack(projectsByRadio)
 		.stack(projectsByNews)
 		.x(d3.time.scale().domain([minDate, maxDate]))
 		.elasticY(true)
+    //.legend(dc.legend())
+    .legend(dc.legend())
 		.renderHorizontalGridLines(true)
-    	.renderVerticalGridLines(true)
+    .renderVerticalGridLines(true)
 		.xAxisLabel("Month")
-		.yAxis().ticks(6);
+		.yAxis().ticks(0);
     dc.renderAll();
 
 };

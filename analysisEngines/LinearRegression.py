@@ -54,7 +54,7 @@ testModelData = json.loads(testModelData)
 
 # Prepare model JSON
 model = {"_id" : uid,
-"summary" : [{
+"summary" : {
     "head": {
       "cov_type": "nonrobust",
       "method": "Least Squares",
@@ -72,19 +72,15 @@ model = {"_id" : uid,
       "rsquared_adj": lm.rsquared_adj,
       "df_resid": lm.df_resid,
       "fvalue": lm.fvalue
-    }
-  },
-  {
+    },
     "values": {
       "params": params,
       "conf_int": conf_int,
       "bse": bse,
       "pvalues": pvalues
-    }
-  },
-  {
+    },
     "diagn": diagn
-  }],
+    },
 "modelResult" : testModelData
   }
 result = db.mixModels.insert_one(model)

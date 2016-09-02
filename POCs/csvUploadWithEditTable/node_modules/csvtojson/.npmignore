@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+node_modules/
+*.swp
+*.swo
+
+# intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+pids
+logs
+results
+build
+graph.png
+.project
+.settings
