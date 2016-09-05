@@ -82,11 +82,11 @@ function makeGraphs(error, apiData) {
 		.stack(projectsByNews)
 		.x(d3.time.scale().domain([minDate, maxDate]))
 		.elasticY(true)
-    //.legend(dc.legend())
     .legend(dc.legend())
 		.renderHorizontalGridLines(true)
     .renderVerticalGridLines(true)
 		.xAxisLabel("Month")
+    //.xAxis().ticks(12)
 		.yAxis().ticks(0);
     dc.renderAll();
 

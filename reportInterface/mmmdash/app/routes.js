@@ -42,6 +42,9 @@ app.post("/uploadfile", upload.single('uploadfile'), function (req, res, next) {
     req.session.collectionName = req.body.Collection == "" ? "MMMDb" : req.body.Collection;
     MongoClient.connect(connectionCsvCollection, function (err, db) {
         console.log("DB is connect");
+        //var cursor = db.collection(collectionName).find();
+        //var deleteStatus=db.collection(req.session.collectionName).remove();
+        //console.log(deleteStatus);
         //var _file = req.files.uploadfile;
         var rs = fs.createReadStream(req.file.path);
         var result = {};
@@ -53,11 +56,12 @@ app.post("/uploadfile", upload.single('uploadfile'), function (req, res, next) {
             }
             db.close();
             res.writeHead(302, {
-                'Location': 'http://localhost:8088'
+                'Location': '/' //http://localhost:8088'
                 // // //add other headers here...
             });
+            fs.unlink(req.file.path);
+            console.log(req.file.path);
             res.end();
-
         });
 
         //record_parsed will be emitted each time a row has been parsed.
@@ -150,8 +154,6 @@ app.post("/api/insertTableData", function (req, res) {
                 db.close();
                 res.send(result);
             });
-
-
         });
 
     }
@@ -160,46 +162,7 @@ app.post("/api/insertTableData", function (req, res) {
 //app.get('*', function (req, res) {
 //    res.sendfile('./public/login.html');
 //});
-app.post("/uploadfile", upload.single('uploadfile'), function (req, res, next) {
 
-    var dataArray = [];
-    var _headerData = {};
-    var _index = 0;
-    //var url = 'mongodb://localhost:27017';
-    req.session.collectionName = req.body.Collection == "" ? "MMMDb" : req.body.Collection;
-    MongoClient.connect(connectionCsvCollection, function (err, db) {
-        console.log("DB is connect");
-        //var _file = req.files.uploadfile;
-        var rs = fs.createReadStream(req.file.path);
-        var result = {};
-        converter.on("end_parsed", function (jsonObj) {
-            //console.log(jsonObj);
-            for (var newRowData in jsonObj) {
-                //console.log(typeof (jsonObj[newRowData].school_zip));
-                db.collection(req.session.collectionName).insert(jsonObj[newRowData]);
-            }
-            db.close();
-            res.writeHead(302, {
-                'Location': 'http://localhost:8088'
-                // // //add other headers here...
-            });
-            res.end();
-
-        });
-
-        //record_parsed will be emitted each time a row has been parsed.
-        converter.on("record_parsed", function (resultRow, rawRow, rowIndex) {
-            for (var key in resultRow) {
-                if (!result[key] || !result[key] instanceof Array) {
-                    result[key] = [];
-                }
-                result[key][rowIndex] = resultRow[key];
-            }
-            //console.log(result);
-        });
-        rs.pipe(converter);
-    });
-});
 /*=========Data Grid routes ends===========*/
 
  // frontend routes =========================================================

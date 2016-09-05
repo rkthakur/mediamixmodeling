@@ -4,7 +4,7 @@ request.post({
   url : 'http://www.sentiment140.com/api/bulkClassifyJson?appid=rthakur@sapient.com',
   method: 'POST',
   json : {
-    'data' : [{'text': 'I am completely thrilled customer review gift Brian from the photo box'},
+    'data' : [{'text': 'I hate this product'},
 
   ]
   }

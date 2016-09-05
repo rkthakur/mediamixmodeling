@@ -98,7 +98,7 @@ spendHistChart.yAxis().ticks(2);
               function (d) { return d.value.radioTotal.toFixed(0) },
               function (d) { return d.value.newsPaperTotal.toFixed(0) }])
     .sortBy(function (d) {
-      console.log(monthShortNames[d.key]);
+      //console.log(monthShortNames[d.key]);
       return d.key; })
     .order(d3.descending);
     //chart.render();
