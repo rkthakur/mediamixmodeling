@@ -6,10 +6,10 @@ import time
 from datetime import datetime
 # imports
 import pandas as pd
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 # this allows plots to appear directly in the notebook
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import statsmodels.formula.api as smf
 dependentVariable ="Sales"
 features = "TV + Radio + Newspaper"
