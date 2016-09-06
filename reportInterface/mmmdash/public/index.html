@@ -72,7 +72,7 @@
                     </div>
                     <div class="6u chart-wrapper" id="model-table">
                         <div class="chart-title bold">  <strong> Model </strong> </div>
-                        <table id="mix-model-console">
+                        <table id="mix-model-summary-console" class="console-data">
                             <thead>
                                 <tr>
                                     <th colspan="4">OLS Regression Result</th>
@@ -134,6 +134,88 @@
                                     <td data-attr-data-name=""></td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <table id="mix-model-console1" class="console-data">
+                            <tbody>
+                                <tr>
+                                    <td>Inercept</td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                </tr>
+                                <tr>
+                                    <td>TV</td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                </tr>
+                                <tr>
+                                    <td>Radio</td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                </tr>
+                                <tr>
+                                    <td>Newspaper</td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                    <td data-attr-data-name="dep_var"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <table id="mix-model-diagn-console" class="console-data">
+                            <tbody>
+                                <tr>
+                                    <td>Omnibus</td>
+                                    <td data-attr-data-name="omni"></td>
+                                    <td>Durbin-Watson</td>
+                                    <td data-attr-data-name="mineigval"></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Prob (Omnibus)</td>
+                                    <td data-attr-data-name="omnipv"></td>
+                                    <td>Jarque-Bera JB</td>
+                                    <td data-attr-data-name="jbpv"></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Skew</td>
+                                    <td data-attr-data-name="skew"></td>
+                                    <td>Prob JB</td>
+                                    <td data-attr-data-name="jb"></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Kurtosis</td>
+                                    <td data-attr-data-name="kurtosis"></td>
+                                    <td>condno</td>
+                                    <td data-attr-data-name="condno"></td>
+
+                                </tr>
+
+                            </tbody>
                         </table>
                     </div>
 
@@ -144,8 +226,9 @@
                     <fieldset>
                         <legend>Upload CSV File</legend>
                         <form action="/uploadfile" method="post" enctype="multipart/form-data">
-                            <label for="collection">Collection name:</label> <input name="Collection" id="Collection" type="hidden" value="SampleData" />
-                            <label for="upload">Choose file:</label>        <input type="file" accept=".csv" name="uploadfile" />
+                            <input name="Collection" id="Collection" type="hidden" value="SampleData" />
+                            <label for="upload">Choose file:</label>
+                            <input type="file" accept=".csv" name="uploadfile" />
                             <button type="submit" name="submit">Submit</button>
                         </form>
                     </fieldset>

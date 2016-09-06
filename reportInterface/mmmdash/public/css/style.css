@@ -2008,19 +2008,24 @@ div.chart-wrapper table {
     width: 100%;
     background: #000;
     color: #fff;
+    
 }
 
-    div.chart-wrapper table thead {
-        font-weight: bold;
-        border: dashed 2px;
-    }
+table.console-data tbody {
+    border: dashed 2px;
+}
 
-    div.chart-wrapper table tr td:nth-child(odd) {
-        text-align: left;
-        color: aqua;
-    }
+div.chart-wrapper table thead {
+    font-weight: bold;
+    border: dashed 2px;
+}
 
-    div.chart-wrapper table tr td:nth-child(even) {
-        text-align: right;
-        padding-right: 10px;
-    }
+div.chart-wrapper table tr td:nth-child(odd) {
+    text-align: left;
+    color: aqua;
+}
+
+div.chart-wrapper table tr td:nth-child(even) {
+    text-align: right;
+    padding-right: 10px;
+}

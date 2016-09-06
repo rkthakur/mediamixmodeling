@@ -33,6 +33,7 @@ var tableData = function () {
             url: "/api/deleteTableData",
             type: "post",
             data: item,
+
             success: function (res) {
                 console.log(res);
             },
@@ -123,7 +124,8 @@ var tableData = function () {
             type: "GET",
             success: function (res) {
                 debugger;
-                var dataRow = $("#mix-model-console tr td[data-attr-data-name]").each(function (index, ele) {
+                /* Printing summary data */
+                $("#mix-model-summary-console tr td[data-attr-data-name]").each(function (index, ele) {
                     var attrName = $(ele).attr("data-attr-data-name");
                     var attrValue = res[0].summary[0].head[attrName];
                     if (attrValue) {
@@ -134,7 +136,22 @@ var tableData = function () {
                             attrValue = new Date(attrValue);
                             attrValue = attrValue.toGMTString().split(attrValue.getFullYear())[1].replace(" ", "");
                         }
-
+                        $(ele).html(attrValue);
+                    }
+                });
+                /*End printing summary data*/
+                /*Priting Diagn data*/
+                $("#mix-model-diagn-console tr td[data-attr-data-name]").each(function (index, ele) {
+                    var attrName = $(ele).attr("data-attr-data-name");
+                    var attrValue = res[0].summary[2].diagn[attrName];
+                    if (attrValue) {
+                        if ($(ele).attr("data-value") == "date") {
+                            attrValue = new Date(attrValue);
+                            attrValue = attrValue.toDateString();
+                        } else if ($(ele).attr("data-value") == "time") {
+                            attrValue = new Date(attrValue);
+                            attrValue = attrValue.toGMTString().split(attrValue.getFullYear())[1].replace(" ", "");
+                        }
                         $(ele).html(attrValue);
                     }
                 });
