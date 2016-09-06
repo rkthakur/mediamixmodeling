@@ -65,17 +65,17 @@ var tableData = function () {
             type: "get",
             success: function (result) {
                 $("#jsGrid").jsGrid({
-                  height: "70%",
-                  width: "100%",
-                  filtering: true,
-                  inserting: true,
-                  editing: true,
-                  sorting: true,
-                  paging: true,
-                  autoload: true,
-                  pageSize: 10,
-                  pageButtonCount: 5,
-                  deleteConfirm: "Do you really want to delete this record?",
+                    height: "70%",
+                    width: "100%",
+                    filtering: true,
+                    inserting: true,
+                    editing: true,
+                    sorting: true,
+                    paging: true,
+                    autoload: true,
+                    pageSize: 10,
+                    pageButtonCount: 5,
+                    deleteConfirm: "Do you really want to delete this record?",
                     data: result,
                     fields: _getTableField(result),
                     onItemInserted: function (args) {
@@ -117,6 +117,40 @@ var tableData = function () {
             error: function (err, xhr) { }
         });
     };
-    _loadTable();
+    var _loadMixModelConsoleData = function () {
+        $.ajax({
+            url: "/api/modeldata",
+            type: "GET",
+            success: function (res) {
+                debugger;
+                var dataRow = $("#mix-model-console tr td[data-attr-data-name]").each(function (index, ele) {
+                    var attrName = $(ele).attr("data-attr-data-name");
+                    var attrValue = res[0].summary[0].head[attrName];
+                    if (attrValue) {
+                        if ($(ele).attr("data-value") == "date") {
+                            attrValue = new Date(attrValue);
+                            attrValue = attrValue.toDateString();
+                        } else if ($(ele).attr("data-value") == "time") {
+                            attrValue = new Date(attrValue);
+                            attrValue = attrValue.toGMTString().split(attrValue.getFullYear())[1].replace(" ", "");
+                        }
+
+                        $(ele).html(attrValue);
+                    }
+                });
+
+            },
+            error: function (err, xhr) {
+                console.log("error on _loadMixModelConsoleData");
+            }
+        });
+    };
+    var _init = function (param) {
+        _loadTable();
+        _loadMixModelConsoleData();
+    }
+    that.init = _init;
+    return that;
 };
-tableData();
+var objTableData = new tableData();
+objTableData.init();

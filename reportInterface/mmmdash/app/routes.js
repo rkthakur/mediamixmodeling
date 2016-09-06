@@ -21,6 +21,8 @@ module.exports = function(app) {
   });
  });
 
+
+
  app.get('/api/modeldata', function(req, res) {
   // use mongoose to get all nerds in the database
   Models.find({'isActive': 'YES'}, {'summary':1, 'modelResult': 1}, function(err, modelDetails) {
