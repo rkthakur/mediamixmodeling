@@ -1,4 +1,5 @@
 // modules =================================================
+var bson = require('./node_modules/mongodb/node_modules/mongodb-core/node_modules/bson/lib/bson')
 var express        = require('express');
 var app            = express();
 var mongoose       = require('mongoose');
