@@ -65,7 +65,10 @@ module.exports = function (app) {
                     'Location': '/' //http://localhost:8088'
                     // // //add other headers here...
                 });
-
+                fs.unlink(req.file.path, function (err) {
+                    if (err) return console.log(err);
+                    console.log('file deleted successfully');
+                });
                 res.end();
             });
 

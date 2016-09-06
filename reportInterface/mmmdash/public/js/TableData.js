@@ -123,7 +123,7 @@ var tableData = function () {
             url: "/api/modeldata",
             type: "GET",
             success: function (res) {
-                debugger;
+                //debugger;
                 /* Printing summary data */
                 $("#mix-model-summary-console tr td[data-attr-data-name]").each(function (index, ele) {
                     var attrName = $(ele).attr("data-attr-data-name");
