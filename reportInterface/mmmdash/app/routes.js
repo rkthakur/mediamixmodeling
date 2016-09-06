@@ -59,8 +59,11 @@ app.post("/uploadfile", upload.single('uploadfile'), function (req, res, next) {
                 'Location': '/' //http://localhost:8088'
                 // // //add other headers here...
             });
-            fs.unlink(req.file.path);
-            console.log(req.file.path);
+            fs.unlink(req.file.path,function(err){
+              if(err)
+                return console.log(err);
+                console.log('file deleted successfully');
+            });
             res.end();
         });
 
