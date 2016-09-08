@@ -127,7 +127,7 @@ var tableData = function () {
                 /* Printing summary data */
                 $("#mix-model-summary-console tr td[data-attr-data-name]").each(function (index, ele) {
                     var attrName = $(ele).attr("data-attr-data-name");
-                    var attrValue = res[0].summary[0].head[attrName];
+                    var attrValue = res[0].summary.head[attrName];
                     if (attrValue) {
                         if ($(ele).attr("data-value") == "date") {
                             attrValue = new Date(attrValue);
