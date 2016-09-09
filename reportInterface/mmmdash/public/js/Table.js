@@ -87,8 +87,8 @@ spendHistChart.yAxis().ticks(2);
 
   var chart = dc.dataTable("#sampledatatable");
   chart
-    .width(768)
-    .height(480)
+    .width(600)
+    .height(250)
     .dimension(groupedDimension)
     .group(rank)
     .showGroups(false)

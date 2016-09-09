@@ -2006,9 +2006,9 @@ ul.style3 {
 
 div.chart-wrapper table {
     width: 100%;
-    background: #000;
-    color: #fff;
-    
+    /* background: #000;
+    color: #fff;*/
+
 }
 
 table.console-data tbody {
@@ -2018,11 +2018,12 @@ table.console-data tbody {
 div.chart-wrapper table thead {
     font-weight: bold;
     border: dashed 2px;
+    text-align: left;
 }
 
 div.chart-wrapper table tr td:nth-child(odd) {
     text-align: left;
-    color: aqua;
+  /*  color: aqua;*/
 }
 
 div.chart-wrapper table tr td:nth-child(even) {

@@ -9,20 +9,38 @@ function makePiGraphs(error, apiData) {
  var chart = dc.pieChart("#pieChart");
 	  chart
 		  .width(600)
-		  .height(220)
+		  .height(250)
 		  //.margins({top: 10, right: 50, bottom: 30, left: 50})
 	    .slicesCap(4)
 	    .innerRadius(0)
 	    .dimension(runDimension)
 	    .group(shareSumGroup)
-	    .legend(dc.legend())
+      .ordinalColors(['DarkGreen', 'DarkKhaki', 'DarkMagenta','DarkOrange','DeepPink','DarkTurquoise'])
+	    //.legend(dc.legend());
+      .legend(dc.legend().x(0).y(0).itemHeight(13).gap(5))
 	    // workaround for #703: not enough data is accessible through .label() to display percentages
-	    .on('pretransition', function(chart) {
-	        chart.selectAll('text.pie-slice').text(function(d) {
+	     .on('pretransition', function(chart) {
+	        chart.selectAll('text.pie-slice').text(function(d) { //'text.pie-slice'
 	            return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2*Math.PI) * 100) + '%';
 	        })
 	    });
-	  chart.render();
+
+    /* chart.on('pretransition', function(chart) {
+                chart.selectAll('.dc-legend-item text')
+                    .text('')
+                  .append('tspan')
+                    .text(function(d) {
+                      return d.name;
+                    })
+                  .append('tspan')
+                    .attr('x', 100)
+                    .attr('text-anchor', 'end')
+                    .text(function(d) {
+                      return d.data;
+                    });
+            });
+*/
+	//  chart.render();
 	};
 
 function makeGraphs(error, apiData) {
@@ -43,8 +61,8 @@ function makeGraphs(error, apiData) {
 	var datePosted = ndx.dimension(function(d) { return d.TDate; });
 
 	//Calculate metrics
-	//var projectsByDate = datePosted.group();
-	var projectsByDate = datePosted.group().reduceSum(function(d) {
+	//var projectsBySales = datePosted.group();
+	var projectsBySales = datePosted.group().reduceSum(function(d) {
 			return d.Sales;
 	});
 
@@ -54,11 +72,11 @@ function makeGraphs(error, apiData) {
 	});
 
 	var projectsByRadio = datePosted.group().reduceSum(function(d) {
-			return d.Radio;
+			return d.Radio / 10;
 	});
 
 	var projectsByNews = datePosted.group().reduceSum(function(d) {
-			return d.Newspaper;
+			return d.Newspaper / 100;
 	});
 
 
@@ -67,14 +85,14 @@ function makeGraphs(error, apiData) {
 	var maxDate = datePosted.top(1)[0].TDate;
 
     //Charts
-	var dateChart = dc.lineChart("#date-chart");
+/*	var dateChart = dc.lineChart("#date-chart");
 
 	dateChart
 		.width(600)
-		.height(220)
+		.height(250)
 		.margins({top: 10, right: 50, bottom: 30, left: 50})
 		.dimension(datePosted)
-		.group(projectsByDate)
+		.group(projectsBySales)
 		.renderArea(false)
 		.transitionDuration(500)
 		.stack(projectsByTV)
@@ -87,7 +105,48 @@ function makeGraphs(error, apiData) {
     .renderVerticalGridLines(true)
 		.xAxisLabel("Month")
     //.xAxis().ticks(12)
-		.yAxis().ticks(0);
-    dc.renderAll();
+		.yAxis().ticks(0);*/
 
+
+    var composite = dc.compositeChart("#composite-chart");
+
+    composite
+    .width(600)
+    .height(250)
+        .x(d3.time.scale().domain([minDate, maxDate]))
+        .xAxisLabel("--")
+        .yAxisLabel("Sales")
+        .rightYAxisLabel("Media Support",50)
+        .useRightAxisGridLines(true)
+        .rightY(d3.yScale)
+        .legend(dc.legend().x(100).y(230).itemHeight(13).gap(5).horizontal(true))
+        .renderHorizontalGridLines(true)
+        .compose([
+            dc.barChart(composite)
+                .dimension(datePosted)
+                .colors('DarkCyan')
+                .useRightYAxis(true)
+                .group(projectsByTV, "TV GRP"),
+                //.dashStyle([2,2]),
+            dc.barChart(composite)
+                .dimension(datePosted)
+                .colors('DarkSlateGray')
+                .useRightYAxis(true)
+                .group(projectsByRadio, "Radio"),
+            dc.barChart(composite)
+                .dimension(datePosted)
+                .colors('ForestGreen')
+                .useRightYAxis(true)
+                .group(projectsByNews, "Newspaper"),
+            dc.lineChart(composite)
+                .dimension(datePosted)
+                .colors('OrangeRed')
+                .group(projectsBySales, "Sales Unit")
+                //.dashStyle([5,5])
+            ])
+        .brushOn(false);
+        composite.rightY(composite.y());
+        composite.xUnits(function(){return 15;});
+
+    dc.renderAll();
 };

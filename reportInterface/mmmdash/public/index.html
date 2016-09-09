@@ -43,33 +43,40 @@
         <div id="page" style="margin-top:-61px;">
 
             <div class="container">
+              <div class="row">
+                  <h2>Upload CSV Data</h2>
+                  <fieldset>
+                      <legend>Upload CSV File</legend>
+                      <form action="/uploadfile" method="post" enctype="multipart/form-data">
+                          <input name="Collection" id="Collection" type="hidden" value="SampleData" />
+                          <label for="upload">Choose file:</label>
+                          <input type="file" accept=".csv" name="uploadfile" />
+                          <button type="submit" name="submit">Submit</button>
+                      </form>
+                  </fieldset>
+              </div>
 
-
-                <div class="row">
-                    <div class="6u chart-wrapper" id="date-chart">
-                        <div class="chart-title bold"> <strong> Sales and Media Volume</strong></div>
+              <div class="row">
+                  <div class="6u chart-wrapper" id="composite-chart">
+                      <div class="chart-title bold"> <strong> Media Volume</strong></div>
                     </div>
-                    <div class="6u chart-wrapper" id="pieChart">
-                        <div class="chart-title bold">  <strong> Media contribution based on Media Mix Modeling </strong> </div>
-
-                    </div>
-
-                </div>
-                <div class="row">
                     <div class="6u chart-wrapper" id="data-table">
-                        <div class="chart-title bold"> <strong> Sales & Media Volume </strong></div>
-                        <table id="sampledatatable" border=1>
+                        <div class="chart-title bold"> <strong>Media Support </strong></div>
+                        <table id="sampledatatable" class="rwd-table" border=1>
                             <thead>
                                 <tr>
                                     <th>Month</th>
-                                    <th>Total Sales</th>
-                                    <th>Total TV Vol.</th>
-                                    <th>Total Radio Vol.</th>
-                                    <th>Total Newspaper Vol.</th>
+                                    <th>Sales Vol.</th>
+                                    <th>TV</th>
+                                    <th>Radio</th>
+                                    <th>Newspaper</th>
                                 </tr>
                             </thead>
                         </table>
                     </div>
+              </div>
+
+                <div class="row">
                     <div class="6u chart-wrapper" id="model-table">
                         <div class="chart-title bold">  <strong> Model </strong> </div>
                         <table id="mix-model-summary-console" class="console-data">
@@ -218,21 +225,11 @@
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="6u chart-wrapper" id="pieChart">
+                        <div class="chart-title bold">  <strong> Media contribution based on Media Mix Modeling </strong> </div>
+                    </div>
                 </div>
 
-                <div class="row">
-                    <h2>Upload CSV Data</h2>
-                    <fieldset>
-                        <legend>Upload CSV File</legend>
-                        <form action="/uploadfile" method="post" enctype="multipart/form-data">
-                            <input name="Collection" id="Collection" type="hidden" value="SampleData" />
-                            <label for="upload">Choose file:</label>
-                            <input type="file" accept=".csv" name="uploadfile" />
-                            <button type="submit" name="submit">Submit</button>
-                        </form>
-                    </fieldset>
-                </div>
                 <div class="row">
                     <h2>Raw table data</h2>
                     <div id="jsGrid"></div>
