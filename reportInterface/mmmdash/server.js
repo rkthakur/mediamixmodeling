@@ -5,20 +5,19 @@ var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-
 var session = require("express-session");
-app.use(session({ secret: '1234567890QWERTY' }));
+var passport = require('passport');
+var Strategy = require('passport-facebook').Strategy;
+
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(require('morgan')('combined'));
+
 //csv = require("ya-csv");
 var fs = require("fs");
 var multer = require("multer");
 var Converter = require("csvtojson").Converter;
 converter = new Converter({});
-upload = multer({
-    dest: 'uploads/', rename: function (fieldname, filename) {
-        console.log("sfasdsad " + fieldname);
-        return "sdfsdfsd";
-    }
-});
+upload = multer({ dest: 'uploads/', rename: function (fieldname, filename) { return "temp"; } });
 
 
 
@@ -31,8 +30,6 @@ connectionCsvCollection = db.urlSubjectViews;
 
 // connect to our mongoDB database (commented out after you enter in your own credentials)
 connectionsubject = mongoose.createConnection(db.urlSubjectViews);
-
-
 
 // get all data/stuff of the body (POST) parameters
 app.use(bodyParser.json()); // parse application/json

@@ -1,16 +1,72 @@
 var Subjects = require('./models/SubjectViews');
 var Models = require('./models/ModelViews');
 var mongodb = require('mongodb');
+var passport = require('passport');
+var Strategy = require('passport-facebook').Strategy;
+var connectEnsureLogin = require('connect-ensure-login');
+var oAuthConfigs = require('../config/social-configs');
+console.log(oAuthConfigs);
+passport.use(new Strategy({
+    clientID: oAuthConfigs.facebook.FACEBOOK_APP_ID,
+    clientSecret: oAuthConfigs.facebook.FACEBOOK_APP_SECRET,
+    callbackURL: oAuthConfigs.facebook.CallbackURL,
+    profileFields: oAuthConfigs.facebook.ProfileFields
+}, function (accessToken, refreshToken, profile, cb) {
+    // In this example, the user's Facebook profile is supplied as the user
+    // record.  In a production-quality application, the Facebook profile should
+    // be associated with a user record in the application's database, which
+    // allows for account linking and authentication with other identity
+    // providers.
+    return cb(null, profile);
+}));
+
+passport.serializeUser(function (user, cb) { cb(null, user); });
+passport.deserializeUser(function (obj, cb) { cb(null, obj); });
+
 var fs = require('fs');
 var MongoClient = mongodb.MongoClient;
 var ObjectId = mongodb.ObjectID;
-module.exports = function (app) {
 
-    // server routes ===========================================================
-    // handle things like api calls
-    // authentication routes
+module.exports = function (app) {
+    // server routes ===========================================================   
+    /*Start: authentication routes*/
+    //app.use(AuthenticationMiddleware());
+    app.use(passport.initialize());
+    app.use(passport.session());
+    app.get("/", function (req, res) {
+        if (!req.isAuthenticated()) {
+            res.redirect("/dashbaord");
+        } else {
+            console.log("User is not authenticated.");
+            res.redirect("/login");
+        }
+
+    });
+    app.get('/login', function (req, res) {
+        if (!req.isAuthenticated()) {
+            res.sendfile('./public/login.html');
+        } else {
+
+        }
+        //res.render('login');
+    });
+
+    app.get('/login/facebook', passport.authenticate('facebook'));
+
+    app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/login' }),
+      function (req, res) {
+          console.log(req.user);
+          res.redirect('/dashboard');
+      });
+
+    app.get('/logout', function (req, res) {
+        console.log('logging out');
+        req.logout();
+        res.redirect('/login');
+    });
+    /*End: authentication routes*/
     // sample api route
-    app.get('/api/data', function (req, res) {
+    app.get('/api/data', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         // use mongoose to get all nerds in the database
         req.session.collectionName = "SampleData";
         Subjects.find({}, { '_id': 0, 'TDate': 1, 'TV': 1, 'Newspaper': 1, 'Radio': 1, 'Sales': 1 }, function (err, subjectDetails) {
@@ -20,12 +76,15 @@ module.exports = function (app) {
                 res.send(err);
             res.json(subjectDetails); // return all nerds in JSON format
         });
-        
+
     });
 
+    app.get('/dashboard', connectEnsureLogin.ensureLoggedIn(),
+     function (req, res) {
+         res.sendfile("./public/dashboard.html");
+     });
 
-
-    app.get('/api/modeldata', function (req, res) {
+    app.get('/api/modeldata', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         // use mongoose to get all nerds in the database
         Models.find({ 'isActive': 'YES' }, { 'summary': 1, 'modelResult': 1 }, function (err, modelDetails) {
             // if there is an error retrieving, send the error.
@@ -37,7 +96,7 @@ module.exports = function (app) {
     });
 
     /*=========Upload File route Starts*/
-    app.post("/uploadfile", upload.single('uploadfile'), function (req, res, next) {
+    app.post("/uploadfile", connectEnsureLogin.ensureLoggedIn(), upload.single('uploadfile'), function (req, res, next) {
 
         var dataArray = [];
         var _headerData = {};
@@ -72,26 +131,6 @@ module.exports = function (app) {
                 res.end();
             });
 
-            //ye neech wala old one hian ise comment kerke tmhara wala replay
-            //converter.on("end_parsed", function (jsonObj) {
-            //    //console.log(jsonObj);
-            //    for (var newRowData in jsonObj) {
-            //        //console.log(typeof (jsonObj[newRowData].school_zip));
-            //        db.collection(req.session.collectionName).insert(jsonObj[newRowData]);
-            //    }
-            //    db.close();
-            //    res.writeHead(302, {
-            //        'Location': '/' //http://localhost:8088'
-            //        // // //add other headers here...
-            //    });
-            //    fs.unlink(req.file.path,function(err){
-            //      if(err)
-            //        return console.log(err);
-            //        console.log('file deleted successfully');
-            //    });
-            //    res.end();
-            //});
-
             //record_parsed will be emitted each time a row has been parsed.
             converter.on("record_parsed", function (resultRow, rawRow, rowIndex) {
                 for (var key in resultRow) {
@@ -109,7 +148,7 @@ module.exports = function (app) {
 
 
     /*=========Data Grid routes starts=========*/
-    app.get("/api/tabledata", function (req, res) {
+    app.get("/api/tabledata", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         var collectionName = "SampleData";
         if (req.session.collectionName) {
             collectionName = req.session.collectionName
@@ -134,7 +173,7 @@ module.exports = function (app) {
         });
 
     });
-    app.post("/api/editTableData", function (req, res) {
+    app.post("/api/editTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         console.log("In editTableData : " + JSON.stringify(req.body));
         req.session.collectionName = "SampleData";
         if (req.session.collectionName) {
@@ -154,7 +193,7 @@ module.exports = function (app) {
 
 
     });
-    app.post("/api/deleteTableData", function (req, res) {
+    app.post("/api/deleteTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         console.log("In deleteTableData : " + JSON.stringify(req.body));
         req.session.collectionName = "SampleData";
         console.log("req.session.collectionName=>" + req.session.collectionName);
@@ -176,7 +215,7 @@ module.exports = function (app) {
             res.send("no colleciton was found");
         }
     });
-    app.post("/api/insertTableData", function (req, res) {
+    app.post("/api/insertTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         console.log("In insertTableData : " + JSON.stringify(req.body));
         req.session.collectionName = "SampleData";
         if (req.session.collectionName) {
@@ -192,16 +231,5 @@ module.exports = function (app) {
 
         }
     });
-    // frontend routes =========================================================
-    //app.get('*', function (req, res) {
-    //    res.sendfile('./public/login.html');
-    //});
-
     /*=========Data Grid routes ends===========*/
-
-    // frontend routes =========================================================
-    app.get('*', function (req, res) {
-        req.session.collectionName = "SampleData";       
-        res.sendfile('./public/login.html');
-    });
 }
