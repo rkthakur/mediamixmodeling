@@ -1,5 +1,12 @@
-module.exports = {
-	urlSubjectViews: 'mongodb://localhost:27017/mediamixmodeling'
-	//urlSubjectViews: 'mongodb://localhost:27017/donorschoose',
-
+var mongoose = require('mongoose');
+var connString = 'mongodb://localhost:27017/mediamixmodeling';
+module.exports = MMMDash.db = {
+    connectionString: connString,
+    connectionObj: mongoose.createConnection(connString),
+    isUserDataCollectionExist: function (collectionName) {
+        console.log("Checking user data collection name: " + collectionName)
+        MMMDash.db.connectionObj.db.collectionNames(function (err, names) {
+            return (names.indexOf(collectionName) > -1 ? true : false);
+        });
+    }
 }

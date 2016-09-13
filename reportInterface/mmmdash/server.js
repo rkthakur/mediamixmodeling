@@ -1,48 +1,34 @@
-// modules =================================================
-var bson = require('./node_modules/mongodb/node_modules/mongodb-core/node_modules/bson/lib/bson')
-var express = require('express');
-var app = express();
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var session = require("express-session");
-var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
+(function () {
+    MMMDash = {} //defining app namespace
 
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
-app.use(require('morgan')('combined'));
+    //var bson = require('./node_modules/mongodb/node_modules/mongodb-core/node_modules/bson/lib/bson')
+    var express = require('express');
+    var app = express();
+    var mongoose = require('mongoose');
+    var bodyParser = require('body-parser');
+    var methodOverride = require('method-override');
+    var session = require("express-session");
+    db = require('./config/db');
+    var fs = require("fs");
+    var multer = require("multer");
+    var Converter = require("csvtojson").Converter;
+    var port = process.env.PORT || 8088;
+    app.use(bodyParser.json()); // parse application/json
+    app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
+    app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
+    app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
+    app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
+    app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+    app.use(require('morgan')('combined'));
 
-//csv = require("ya-csv");
-var fs = require("fs");
-var multer = require("multer");
-var Converter = require("csvtojson").Converter;
-converter = new Converter({});
-upload = multer({ dest: 'uploads/', rename: function (fieldname, filename) { return "temp"; } });
+    converter = new Converter({});
+    upload = multer({ dest: 'uploads/', rename: function (fieldname, filename) { return "temp"; } });
+    
+    require('./app/routes')(app, MMMDash); // pass our application into our routes
+    // start app ===============================================
+    app.listen(port);
+    console.log('Magic happens on port ' + port);
+    exports = module.exports = app;
+})({});
 
 
-
-// configuration ===========================================
-
-// config files
-var port = process.env.PORT || 8088; // set our port
-var db = require('./config/db');
-connectionCsvCollection = db.urlSubjectViews;
-
-// connect to our mongoDB database (commented out after you enter in your own credentials)
-connectionsubject = mongoose.createConnection(db.urlSubjectViews);
-
-// get all data/stuff of the body (POST) parameters
-app.use(bodyParser.json()); // parse application/json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
-app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
-
-app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
-app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
-
-// routes ==================================================
-require('./app/routes')(app); // pass our application into our routes
-
-// start app ===============================================
-app.listen(port);
-console.log('Magic happens on port ' + port); 			// shoutout to the user
-exports = module.exports = app; 						// expose app

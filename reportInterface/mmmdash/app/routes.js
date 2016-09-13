@@ -1,22 +1,18 @@
-var Subjects = require('./models/SubjectViews');
-var Models = require('./models/ModelViews');
+var regressionAnalysisModel, mixModellingModel;
+
 var mongodb = require('mongodb');
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var connectEnsureLogin = require('connect-ensure-login');
 var oAuthConfigs = require('../config/social-configs');
-console.log(oAuthConfigs);
+var userDataRepo = require("./MMMDashBL/UserDataRepository");
+
 passport.use(new Strategy({
     clientID: oAuthConfigs.facebook.FACEBOOK_APP_ID,
     clientSecret: oAuthConfigs.facebook.FACEBOOK_APP_SECRET,
     callbackURL: oAuthConfigs.facebook.CallbackURL,
     profileFields: oAuthConfigs.facebook.ProfileFields
 }, function (accessToken, refreshToken, profile, cb) {
-    // In this example, the user's Facebook profile is supplied as the user
-    // record.  In a production-quality application, the Facebook profile should
-    // be associated with a user record in the application's database, which
-    // allows for account linking and authentication with other identity
-    // providers.
     return cb(null, profile);
 }));
 
@@ -27,7 +23,7 @@ var fs = require('fs');
 var MongoClient = mongodb.MongoClient;
 var ObjectId = mongodb.ObjectID;
 
-module.exports = function (app) {
+module.exports = function (app, MMMDash) {
     // server routes ===========================================================   
     /*Start: authentication routes*/
     //app.use(AuthenticationMiddleware());
@@ -35,12 +31,11 @@ module.exports = function (app) {
     app.use(passport.session());
     app.get("/", function (req, res) {
         if (!req.isAuthenticated()) {
-            res.redirect("/dashbaord");
-        } else {
             console.log("User is not authenticated.");
             res.redirect("/login");
+        } else {
+            res.redirect("/dashbaord");
         }
-
     });
     app.get('/login', function (req, res) {
         if (!req.isAuthenticated()) {
@@ -55,7 +50,10 @@ module.exports = function (app) {
 
     app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/login' }),
       function (req, res) {
-          console.log(req.user);
+          MMMDash.user = req.user;
+          var _userRepo = new userDataRepo(MMMDash);
+          regressionAnalysisModel = require('./models/RegressionAnalysisViews');
+          mixModellingModel = require('./models/MixModellingViews');
           res.redirect('/dashboard');
       });
 
@@ -67,32 +65,33 @@ module.exports = function (app) {
     /*End: authentication routes*/
     // sample api route
     app.get('/api/data', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-        // use mongoose to get all nerds in the database
-        req.session.collectionName = "SampleData";
-        Subjects.find({}, { '_id': 0, 'TDate': 1, 'TV': 1, 'Newspaper': 1, 'Radio': 1, 'Sales': 1 }, function (err, subjectDetails) {
-            // if there is an error retrieving, send the error.
-            // nothing after res.send(err) will execute
-            if (err)
-                res.send(err);
-            res.json(subjectDetails); // return all nerds in JSON format
+        //
+        var cursor = MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName).find({}, { '_id': 0, 'TDate': 1, 'TV': 1, 'Newspaper': 1, 'Radio': 1, 'Sales': 1 });
+        var dataArray = [];
+        cursor.each(function (err, doc) {
+            if (doc != null) {
+                dataArray.push(doc);
+            } else {
+                res.send(dataArray);
+            }
         });
-
     });
 
-    app.get('/dashboard', connectEnsureLogin.ensureLoggedIn(),
-     function (req, res) {
-         res.sendfile("./public/dashboard.html");
-     });
+    app.get('/dashboard', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
+        res.sendfile("./public/dashboard.html");
+    });
 
     app.get('/api/modeldata', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         // use mongoose to get all nerds in the database
-        Models.find({ 'isActive': 'YES' }, { 'summary': 1, 'modelResult': 1 }, function (err, modelDetails) {
-            // if there is an error retrieving, send the error.
-            // nothing after res.send(err) will execute
-            if (err)
-                res.send(err);
-            res.json(modelDetails); // return all nerds in JSON format
-        }); //.sort({_id:-1}).limit(1)
+        var cursor = MMMDash.db.connectionObj.db.collection(MMMDash.userMixModelCollectionName).find();
+        var dataArray = [];
+        cursor.each(function (err, doc) {
+            if (doc != null) {
+                dataArray.push(doc);
+            } else {
+                res.send(dataArray);
+            }
+        });
     });
 
     /*=========Upload File route Starts*/
@@ -101,135 +100,80 @@ module.exports = function (app) {
         var dataArray = [];
         var _headerData = {};
         var _index = 0;
-        //var url = 'mongodb://localhost:27017';
-        req.session.collectionName = req.body.Collection == "" ? "MMMDb" : req.body.Collection;
-        console.log("req.session.collectionName=>" + req.session.collectionName);
-        MongoClient.connect(connectionCsvCollection, function (err, db) {
-            console.log("DB is connect");
-            //var cursor = db.collection(collectionName).find();
-            //var deleteStatus=db.collection(req.session.collectionName).remove();
-            //console.log(deleteStatus);
-            //var _file = req.files.uploadfile;
-            var rs = fs.createReadStream(req.file.path);
-            var result = {};
-            converter.on("end_parsed", function (jsonObj) {
-                //console.log(jsonObj);
-                db.collection(req.session.collectionName).remove();
-                for (var newRowData in jsonObj) {
-                    //console.log(typeof (jsonObj[newRowData].school_zip));
-                    db.collection(req.session.collectionName).insert(jsonObj[newRowData]);
-                }
-                db.close();
-                res.writeHead(302, {
-                    'Location': '/' //http://localhost:8088'
-                    // // //add other headers here...
-                });
-                fs.unlink(req.file.path, function (err) {
-                    if (err) return console.log(err);
-                    console.log('file deleted successfully');
-                });
-                res.end();
+        var rs = fs.createReadStream(req.file.path);
+        var result = {};
+        converter.on("end_parsed", function (jsonObj) {
+            MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName, function (err, collection) {
+                collection.remove({}, function (err, removed) { });
             });
-
-            //record_parsed will be emitted each time a row has been parsed.
-            converter.on("record_parsed", function (resultRow, rawRow, rowIndex) {
-                for (var key in resultRow) {
-                    if (!result[key] || !result[key] instanceof Array) {
-                        result[key] = [];
-                    }
-                    result[key][rowIndex] = resultRow[key];
-                }
-                //console.log(result);
+            for (var newRowData in jsonObj) {
+                //console.log(typeof (jsonObj[newRowData].school_zip));
+                MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName).insert(jsonObj[newRowData], function (err, inserted) {
+                    console.log("Data inserted " + inserted);
+                });
+            }
+            res.writeHead(302, { 'Location': '/' });
+            fs.unlink(req.file.path, function (err) {
+                if (err) return console.log(err);
+                console.log('file deleted successfully');
             });
-            rs.pipe(converter);
+            res.end();
         });
+
+        //record_parsed will be emitted each time a row has been parsed.
+        converter.on("record_parsed", function (resultRow, rawRow, rowIndex) {
+            for (var key in resultRow) {
+                if (!result[key] || !result[key] instanceof Array) {
+                    result[key] = [];
+                }
+                result[key][rowIndex] = resultRow[key];
+            }
+            //console.log(result);
+        });
+        rs.pipe(converter);
+        //});
     });
     /*=========Upload File route Ends===========*/
 
-
     /*=========Data Grid routes starts=========*/
     app.get("/api/tabledata", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-        var collectionName = "SampleData";
-        if (req.session.collectionName) {
-            collectionName = req.session.collectionName
-        } else {
-            req.session.collectionName = collectionName;
-        }
-        MongoClient.connect(connectionCsvCollection, function (err, db) {
-            var cursor = db.collection(collectionName).find();
-            var dataArray = [];
-            cursor.each(function (err, doc) {
-                //assert.equal(err, null);
-                if (doc != null) {
-                    //console.log(doc);
-                    dataArray.push(doc);
-                } else {
-                    db.close();
-                    res.send(dataArray);
-                }
-            });
-
-
+        var cursor = MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).find();
+        var dataArray = [];
+        cursor.each(function (err, doc) {
+            if (doc != null) {
+                dataArray.push(doc);
+            } else {
+                res.send(dataArray);
+            }
         });
-
     });
     app.post("/api/editTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         console.log("In editTableData : " + JSON.stringify(req.body));
-        req.session.collectionName = "SampleData";
-        if (req.session.collectionName) {
-            MongoClient.connect(connectionCsvCollection, function (err, db) {
-                var _id = req.body._id;
-                delete req.body._id;
-                console.log(req.body);
-                db.collection(req.session.collectionName).update({ "_id": new ObjectId(_id) }, req.body, function (err, result) {
-                    db.close();
-                    res.send(result);
-                });
-
-
-            });
-
-        }
-
-
+        var _id = req.body._id;
+        delete req.body._id;
+        console.log(req.body);
+        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": new ObjectId(_id) }, req.body, function (err, result) {
+            res.send(result);
+        });
     });
     app.post("/api/deleteTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         console.log("In deleteTableData : " + JSON.stringify(req.body));
-        req.session.collectionName = "SampleData";
-        console.log("req.session.collectionName=>" + req.session.collectionName);
-        if (req.session.collectionName) {
-            MongoClient.connect(connectionCsvCollection, function (err, db) {
-                var _id = req.body._id;
-                delete req.body._id;
-                console.log(req.body);
-                db.collection(req.session.collectionName).deleteOne({ "_id": new ObjectId(_id) }, function (err, result) {
-                    db.close();
-                    res.send(result);
-                });
-
-
-            });
-
-        }
-        else {
-            res.send("no colleciton was found");
-        }
+        var _id = req.body._id;
+        delete req.body._id;
+        console.log(req.body);
+        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).deleteOne({ "_id": new ObjectId(_id) }, function (err, result) {
+            res.send(result);
+        });
     });
     app.post("/api/insertTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         console.log("In insertTableData : " + JSON.stringify(req.body));
         req.session.collectionName = "SampleData";
-        if (req.session.collectionName) {
-            MongoClient.connect(connectionCsvCollection, function (err, db) {
-                var _id = req.body._id;
-                delete req.body._id;
-                console.log(req.body);
-                db.collection(req.session.collectionName).insertOne(req.body, function (err, result) {
-                    db.close();
-                    res.send(result);
-                });
-            });
-
-        }
+        var _id = req.body._id;
+        delete req.body._id;
+        console.log(req.body);
+        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).insertOne(req.body, function (err, result) {
+            res.send(result);
+        });
     });
     /*=========Data Grid routes ends===========*/
 }
