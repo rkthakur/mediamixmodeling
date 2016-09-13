@@ -30,18 +30,19 @@ module.exports = function (app, MMMDash) {
     app.use(passport.initialize());
     app.use(passport.session());
     app.get("/", function (req, res) {
-        if (!req.isAuthenticated()) {
+		res.sendfile('./public/login.html');
+        /*if (!req.isAuthenticated()) {
             console.log("User is not authenticated.");
             res.redirect("/login");
         } else {
             res.redirect("/dashbaord");
-        }
+        }*/
     });
     app.get('/login', function (req, res) {
         if (!req.isAuthenticated()) {
             res.sendfile('./public/login.html');
         } else {
-
+			res.sendfile('./public/index.html');
         }
         //res.render('login');
     });
@@ -54,7 +55,7 @@ module.exports = function (app, MMMDash) {
           var _userRepo = new userDataRepo(MMMDash);
           regressionAnalysisModel = require('./models/RegressionAnalysisViews');
           mixModellingModel = require('./models/MixModellingViews');
-          res.redirect('/dashboard');
+          res.redirect('/dashboard#demo');
       });
 
     app.get('/logout', function (req, res) {
@@ -78,7 +79,8 @@ module.exports = function (app, MMMDash) {
     });
 
     app.get('/dashboard', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-        res.sendfile("./public/dashboard.html");
+        //res.sendfile("./public/dashboard.html");
+		res.sendfile("./public/index.html");
     });
 
     app.get('/api/modeldata', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
