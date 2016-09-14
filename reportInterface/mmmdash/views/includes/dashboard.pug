@@ -1,24 +1,22 @@
-//include includes/dashboard.pug
-dashboard
-  section#demo.bg-bright
-  .container
-    .row
-     h2.section-heading ROMImate Live Demonstration
-     hr.light
-     #botinput
-       p#preinputtext.text-faded  {Little about action and end result of demo}
-        Complete Dashboard goes here
-     #botloader(style='display:none;padding-top: 45px;height:120px;')
-       .cssload-loader
-         .cssload-flipper
-           .cssload-front
-           .cssload-back
-     #botresult.ct-chart.ct-double-octave(style='display:none')
-     i.fa.fa-lg.fa-info-circle.text-primary(href='#whatisthis', data-rel='lightcase', style='color:white;')
-       span(style='font-size:0.7em') I don&apos;t understand this. Tell me more.
+section.bg-bright
+.container
+  .row
+   h2.section-heading ROMImate Live Demonstration
+   hr.light
+   #botinput
+     p#preinputtext.text-faded  {Little about action and end result of demo}
+      Complete Dashboard goes here
+   #botloader(style='display:none;padding-top: 45px;height:120px;')
+     .cssload-loader
+       .cssload-flipper
+         .cssload-front
+         .cssload-back
+   #botresult.ct-chart.ct-double-octave(style='display:none')
+   i.fa.fa-lg.fa-info-circle.text-primary(href='#whatisthis', data-rel='lightcase', style='color:white;')
+     span(style='font-size:0.7em') I don&apos;t understand this. Tell me more.
 
-       #whatisthis(style='display:none')
-               h4 Don&apos;t Understand? {Instruction to Kick start}
-               ul
-                 li About Chart1
-                 li About Chart...
+     #whatisthis(style='display:none')
+             h4 Don&apos;t Understand? {Instruction to Kick start}
+             ul
+               li About Chart1
+               li About Chart...
