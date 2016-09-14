@@ -23,11 +23,12 @@ LOG_FILENAME = './logs/LinearRegression.log'
 #FORMAT = '%(asctime)-15s %(clientip)s %(user)-8s %(message)s'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 logging.info('Initialization done...')
-
+uid="10207145251097586"
+SampaleData=uid+"_Data"
 #load Sample date for media mix modeling
-def getDataForModeling():
-    collection = db.SampleData
-    data = pd.DataFrame(list(collection.find()))
+def getDataForModeling(uid):
+    SampleData=uid+"_Data"
+    data = pd.DataFrame(list(db[SampleData].find()))
     return data
 
 def runModel(data):
@@ -100,26 +101,27 @@ def modelToJson(lm,data):
     return model
 
 #Store Model in Database
-def storeModel(model):
-    result = db.mixModels.insert_one(model)
-    result = db.mixModels.update_many({},{"$set" : {"isActive": "NO"}})
-    result = db.mixModels.update_many({"_id": model['_id']},{"$set" : {"isActive": "YES"}})
+def storeModel(model, uid):
+    col_mixModel=uid+"_MixModel"
+    result = db[col_mixModel].insert_one(model)
+    result = db[col_mixModel].update_many({},{"$set" : {"isActive": "NO"}})
+    result = db[col_mixModel].update_many({"_id": model['_id']},{"$set" : {"isActive": "YES"}})
     #db.getCollection('mixModels').find({}).sort({_id:-1}).limit(1)
     return model
 
-def runLinearRegression():
+def runLinearRegression(uid):
     #Get Data from DB and transform into Pandas=>DataFrame
-    data=getDataForModeling()
+    data=getDataForModeling(uid)
     #Run Linear Regression on Data
     lm=runModel(data)
     #Transform Leaner model into JSON
     jmodel=modelToJson(lm,data)
     #Store model
-    model=storeModel(jmodel)
+    model=storeModel(jmodel,uid)
     return model
 
 def main():
-    runLinearRegression()
+    runLinearRegression('10207145251097586')
 
 if __name__ == '__main__':
     main()
