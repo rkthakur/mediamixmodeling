@@ -12,6 +12,19 @@
     var fs = require("fs");
     var multer = require("multer");
     var Converter = require("csvtojson").Converter;
+
+    var path = require('path');
+    var favicon = require('serve-favicon');
+    var logger = require('morgan');
+    var cookieParser = require('cookie-parser');
+
+    var routes = require('./app/index');
+    var users = require('./app/users');
+
+    // view engine pug setup
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'pug');
+
     var port = process.env.PORT || 8088;
     app.use(bodyParser.json()); // parse application/json
     app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
@@ -23,13 +36,13 @@
 
     converter = new Converter({});
     upload = multer({ dest: 'uploads/', rename: function (fieldname, filename) { return "temp"; } });
-    
+
     require('./app/routes')(app, MMMDash); // pass our application into our routes
     // start app ===============================================
     app.listen(port);
     console.log('Magic happens on port ' + port);
-	
-	
+
+
 	process.stdin.resume();//so the program will not close instantly
 
 	function exitHandler(options, err) {
@@ -48,8 +61,6 @@
 
 	//catches uncaught exceptions
 	process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
-	
+
     exports = module.exports = app;
 })({});
-
-

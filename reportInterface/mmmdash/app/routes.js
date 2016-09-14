@@ -24,25 +24,31 @@ var MongoClient = mongodb.MongoClient;
 var ObjectId = mongodb.ObjectID;
 
 module.exports = function (app, MMMDash) {
-    // server routes ===========================================================   
+    // server routes ===========================================================
     /*Start: authentication routes*/
     //app.use(AuthenticationMiddleware());
     app.use(passport.initialize());
     app.use(passport.session());
-    app.get("/", function (req, res) {
-		res.sendfile('./public/login.html');
+
+    /* GET home page. */
+    app.get('/', function(req, res, next) {
+      res.render('index', { title: 'Express' });
+    });
+
+    /* app.get("/", function (req, res) {
+		res.sendfile('./public/login.html');*/
         /*if (!req.isAuthenticated()) {
             console.log("User is not authenticated.");
             res.redirect("/login");
         } else {
             res.redirect("/dashbaord");
         }*/
-    });
+    //});
     app.get('/login', function (req, res) {
         if (!req.isAuthenticated()) {
             res.sendfile('./public/login.html');
         } else {
-			res.sendfile('./public/index.html');
+			res.sendfile('./public/index1.html');
         }
         //res.render('login');
     });
@@ -80,7 +86,7 @@ module.exports = function (app, MMMDash) {
 
     app.get('/dashboard', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         //res.sendfile("./public/dashboard.html");
-		res.sendfile("./public/index.html");
+		res.sendfile("./public/index1.html");
     });
 
     app.get('/api/modeldata', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
