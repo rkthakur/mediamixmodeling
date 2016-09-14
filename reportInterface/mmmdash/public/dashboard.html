@@ -44,22 +44,22 @@
         <div id="page" style="margin-top:-61px;">
 
             <div class="container">
-              <div class="row">
-                  <h2>Upload CSV Data</h2>
-                  <fieldset>
-                      <legend>Upload CSV File</legend>
-                      <form action="/uploadfile" method="post" enctype="multipart/form-data">
-                          <input name="Collection" id="Collection" type="hidden" value="SampleData" />
-                          <label for="upload">Choose file:</label>
-                          <input type="file" accept=".csv" name="uploadfile" />
-                          <button type="submit" name="submit">Submit</button>
-                      </form>
-                  </fieldset>
-              </div>
+                <div class="row">
+                    <h2>Upload CSV Data</h2>
+                    <fieldset>
+                        <legend>Upload CSV File</legend>
+                        <form action="/uploadfile" method="post" enctype="multipart/form-data">
+                            <input name="Collection" id="Collection" type="hidden" value="SampleData" />
+                            <label for="upload">Choose file:</label>
+                            <input type="file" accept=".csv" name="uploadfile" />
+                            <button type="submit" name="submit">Submit</button>
+                        </form>
+                    </fieldset>
+                </div>
 
-              <div class="row">
-                  <div class="6u chart-wrapper" id="composite-chart">
-                      <div class="chart-title bold"> <strong> Media Volume</strong></div>
+                <div class="row">
+                    <div class="6u chart-wrapper" id="composite-chart">
+                        <div class="chart-title bold"> <strong> Media Volume</strong></div>
                     </div>
                     <div class="6u chart-wrapper" id="data-table">
                         <div class="chart-title bold"> <strong>Media Support </strong></div>
@@ -75,7 +75,7 @@
                             </thead>
                         </table>
                     </div>
-              </div>
+                </div>
 
                 <div class="row">
                     <div class="6u chart-wrapper" id="model-table">
