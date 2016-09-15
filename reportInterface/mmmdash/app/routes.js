@@ -5,12 +5,11 @@ var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var connectEnsureLogin = require('connect-ensure-login');
 var oAuthConfigs = require('../config/social-configs-dev');
-if (process.env.NODE_ENV)
-{
-  if ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT')
-      var oAuthConfigs = require('../config/social-configs-dev');
-  else if ((process.env.NODE_ENV).toUpperCase() == 'PRODUCTION')
-      var oAuthConfigs = require('../config/social-configs-prod');
+if (process.env.NODE_ENV) {
+    if ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT')
+        var oAuthConfigs = require('../config/social-configs-dev');
+    else if ((process.env.NODE_ENV).toUpperCase() == 'PRODUCTION')
+        var oAuthConfigs = require('../config/social-configs-prod');
 }
 
 var userDataRepo = require("./MMMDashBL/UserDataRepository");
@@ -43,15 +42,6 @@ module.exports = function (app, MMMDash) {
         res.render('index', { title: 'ROIMmate-Marketing Investment Measurement', user: req.user });
     });
 
-    /* app.get("/", function (req, res) {
-		res.sendfile('./public/login.html');*/
-    /*if (!req.isAuthenticated()) {
-        console.log("User is not authenticated.");
-        res.redirect("/login");
-    } else {
-        res.redirect("/dashbaord");
-    }*/
-    //});
     app.get('/login', function (req, res) {
         if (!req.isAuthenticated()) {
             res.sendfile('./public/login.html');
@@ -63,7 +53,7 @@ module.exports = function (app, MMMDash) {
 
     app.get('/login/facebook', passport.authenticate('facebook'));
 
-    app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/login' }),
+    app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/' }),
       function (req, res) {
           MMMDash.user = req.user;
           var _userRepo = new userDataRepo(MMMDash);
@@ -123,9 +113,12 @@ module.exports = function (app, MMMDash) {
                 collection.remove({}, function (err, removed) { });
             });
             for (var newRowData in jsonObj) {
-                //console.log(typeof (jsonObj[newRowData].school_zip));
-                MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName).insert(jsonObj[newRowData], function (err, inserted) {
-                    console.log("Data inserted " + inserted);
+                var _data = jsonObj[newRowData];
+                _data._id = String(new ObjectId());
+                console.log(_data);
+                MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName).insert(_data, function (err, inserted) {
+                    console.log("Data inserted " + JSON.stringify(inserted));
+                    console.log("Data inserted error " + err);
                 });
             }
             res.writeHead(302, { 'Location': '/' });
@@ -168,7 +161,8 @@ module.exports = function (app, MMMDash) {
         var _id = req.body._id;
         delete req.body._id;
         console.log(req.body);
-        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": new ObjectId(_id) }, req.body, function (err, result) {
+        console.log("MMMDash.userDataCollectionName)." + MMMDash.userDataCollectionName);
+        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": _id }, req.body, function (err, result) {
             res.send(result);
         });
     });
@@ -176,18 +170,17 @@ module.exports = function (app, MMMDash) {
         console.log("In deleteTableData : " + JSON.stringify(req.body));
         var _id = req.body._id;
         delete req.body._id;
-        console.log(req.body);
-        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).deleteOne({ "_id": new ObjectId(_id) }, function (err, result) {
+        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).delete({ "_id": new ObjectId(_id) }, function (err, result) {
+            console.log("deleteTableData=> " + err ? err : result);
             res.send(result);
         });
     });
     app.post("/api/insertTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         console.log("In insertTableData : " + JSON.stringify(req.body));
-        req.session.collectionName = "SampleData";
-        var _id = req.body._id;
-        delete req.body._id;
-        console.log(req.body);
-        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).insertOne(req.body, function (err, result) {
+        var _data = req.body;
+        _data._id = String(new ObjectId());
+        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).insert(_data, function (err, result) {
+            console.log("insertTableData=> " + err ? err : result);
             res.send(result);
         });
     });

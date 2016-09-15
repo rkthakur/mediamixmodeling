@@ -4,6 +4,7 @@
     //var bson = require('./node_modules/mongodb/node_modules/mongodb-core/node_modules/bson/lib/bson')
     var express = require('express');
     var app = express();
+    var expressWs = require('express-ws')(app);
     var mongoose = require('mongoose');
     var bodyParser = require('body-parser');
     var methodOverride = require('method-override');
@@ -25,12 +26,11 @@
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'pug');
     var port = process.env.PORT || 8088;
-    if (process.env.NODE_ENV)
-    {
-      if ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT')
-          var port = process.env.PORT || 8088;
-      else if ((process.env.NODE_ENV).toUpperCase() == 'PRODUCTION')
-          var port = process.env.PORT || 80;
+    if (process.env.NODE_ENV) {
+        if ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT')
+            var port = process.env.PORT || 8088;
+        else if ((process.env.NODE_ENV).toUpperCase() == 'PRODUCTION')
+            var port = process.env.PORT || 80;
     }
     app.use(bodyParser.json()); // parse application/json
     app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
@@ -44,29 +44,30 @@
     upload = multer({ dest: 'uploads/', rename: function (fieldname, filename) { return "temp"; } });
 
     require('./app/routes')(app, MMMDash); // pass our application into our routes
+
     // start app ===============================================
     app.listen(port);
     console.log('Magic happens on port ' + port);
 
 
-	process.stdin.resume();//so the program will not close instantly
+    process.stdin.resume();//so the program will not close instantly
 
-	function exitHandler(options, err) {
-		mongoose.disconnect();
-		console.log('clean');
-		if (options.cleanup) console.log('clean');
-		if (err) console.log(err.stack);
-		if (options.exit) process.exit();
-	}
+    function exitHandler(options, err) {
+        mongoose.disconnect();
+        console.log('clean');
+        if (options.cleanup) console.log('clean');
+        if (err) console.log(err.stack);
+        if (options.exit) process.exit();
+    }
 
-	//do something when app is closing
-	process.on('exit', exitHandler.bind(null,{cleanup:true}));
+    //do something when app is closing
+    process.on('exit', exitHandler.bind(null, { cleanup: true }));
 
-	//catches ctrl+c event
-	process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+    //catches ctrl+c event
+    process.on('SIGINT', exitHandler.bind(null, { exit: true }));
 
-	//catches uncaught exceptions
-	process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
+    //catches uncaught exceptions
+    process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
 
     exports = module.exports = app;
 })({});
