@@ -67,14 +67,6 @@ p {
     color: rgba(0,0,0,.7);
 }
 
-section {
-    padding: 100px 0;
-}
-
-aside {
-    padding: 50px 0;
-}
-
 .no-padding {
     padding: 0;
 }
@@ -558,6 +550,26 @@ body {
 		-ms-transform: rotateY(-180deg);
 		-webkit-transform: rotateY(-180deg);
 		-moz-transform: rotateY(-180deg);
+}
+
+/*login section
+*/
+#loginsection{
+  padding: 50px 0;
+}
+ul.social-logins{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.btn-social{
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 8px;
+
+}
+.fa:before{
+  font-size: 20px;
 }
 
 
