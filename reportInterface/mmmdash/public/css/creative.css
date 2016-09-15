@@ -25,7 +25,7 @@ hr.light {
 }
 
 a {
-    color: #8a8ade;
+    color: #666;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -33,7 +33,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #eb3812;
+    color: #999;
 }
 
 h1,
@@ -43,6 +43,7 @@ h4,
 h5,
 h6 {
     font-family: 'Oswald', Arial,sans-serif;
+    margin-bottom: 25px;
 }
 
 p {
@@ -265,6 +266,7 @@ input{
 
 .service-box p {
     margin-bottom: 0;
+    color: #ccc
 }
 
 .portfolio-box {
@@ -332,7 +334,7 @@ input{
 }
 
 .text-primary {
-    color: #8a8ade;
+    color: #fff;
 }
 
 .text-secondary {
@@ -554,8 +556,8 @@ body {
 
 /*login section
 */
-#loginsection{
-  padding: 50px 0;
+.loginsection{
+  padding: 30px;
 }
 ul.social-logins{
   margin: 0;
@@ -569,8 +571,35 @@ ul.social-logins{
 
 }
 .fa:before{
-  font-size: 20px;
+  font-size: 30px;
 }
+.why-signin ul li{
+  line-height: 25px;
+}
+
+/*About Section*/
+.about-section{
+  padding: 30px 15px
+}
+#commit{
+  padding: 70px 0
+}
+#contact{
+  padding-top: 40px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
