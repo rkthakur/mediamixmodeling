@@ -10,7 +10,12 @@ nav#mainNav.navbar.navbar-default.navbar-fixed-top
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         ul.nav.navbar-nav.navbar-right
           li
-            a.page-scroll(href='#demo') Try ROMImate
+            if user == undefined
+              a.page-scroll(href='#dashboard') Sign in
+            else if user.id != null
+              a.page-scroll(href='#') Welcome #{user.displayName}!
+          li
+            a.page-scroll(href='#dashboard') Try ROMImate
           li
             a.page-scroll(href='#about') About the app
           li
@@ -19,3 +24,6 @@ nav#mainNav.navbar.navbar-default.navbar-fixed-top
             a.page-scroll(href='#commit') Source Code
           li
             a.page-scroll(href='#contact') Contact
+          li
+            if user != undefined
+                    a.page-scroll(href='/logout') Sign Out

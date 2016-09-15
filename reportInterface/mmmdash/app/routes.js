@@ -67,7 +67,7 @@ module.exports = function (app, MMMDash) {
     app.get('/logout', function (req, res) {
         console.log('logging out');
         req.logout();
-        res.redirect('/login');
+        res.redirect('/');
     });
     /*End: authentication routes*/
     // sample api route

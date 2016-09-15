@@ -18,8 +18,8 @@
     var logger = require('morgan');
     var cookieParser = require('cookie-parser');
 
-    var routes = require('./app/index');
-    var users = require('./app/users');
+    //var routes = require('./app/index');
+    //var users = require('./app/users');
 
     // view engine pug setup
     app.set('views', path.join(__dirname, 'views'));

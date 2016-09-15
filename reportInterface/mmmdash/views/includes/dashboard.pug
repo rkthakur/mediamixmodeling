@@ -1,15 +1,16 @@
-dashboard
+section#dashboard.bg-bright
+.container
 .row
   h2 Upload CSV Data
   fieldset
     legend Upload CSV File
     form(action='/uploadfile', method='post', enctype='multipart/form-data')
       input#Collection(name='Collection', type='hidden', value='SampleData')
-        
+
       label(for='upload') Choose file:
-        
+
       input(type='file', accept='.csv', name='uploadfile')
-        
+
       button(type='submit', name='submit') Submit
 .row
   #composite-chart.u6.chart-wrapper
