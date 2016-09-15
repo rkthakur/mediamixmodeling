@@ -1,6 +1,8 @@
 queue().defer(d3.json, "/api/data").await(makeGraphs);
 queue().defer(d3.json, "/api/modeldata").await(makePiGraphs);
 function makePiGraphs(error, apiData) {
+  if (apiData != undefined)
+  {
  var ndx   = crossfilter(apiData[0].modelResult),
 	      runDimension  = ndx.dimension(function(d) {
 					return d.media;
@@ -41,10 +43,12 @@ function makePiGraphs(error, apiData) {
             });
 */
 	//  chart.render();
-	};
+}
+};
 
 function makeGraphs(error, apiData) {
-
+  if (apiData != undefined)
+  {
 //Start Transformations
 	var dataSet = apiData;
 	var dateFormat = d3.time.format("%m/%d/%Y");
@@ -149,4 +153,5 @@ function makeGraphs(error, apiData) {
         composite.xUnits(function(){return 15;});
 
     dc.renderAll();
+}
 };

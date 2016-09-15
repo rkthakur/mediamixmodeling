@@ -2,6 +2,8 @@ var monthNames = ["January", "February", "March", "April", "May", "June","July",
 var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 queue().defer(d3.json, "/api/data").await(tableGraph);
 function tableGraph(error, apiData) {
+  if (apiData != undefined)
+  {
   var dateFormat = d3.time.format("%m/%d/%Y");
 	apiData.forEach(function(d) {
 		d.TDate = dateFormat.parse(d.TDate);
@@ -103,4 +105,5 @@ spendHistChart.yAxis().ticks(2);
     .order(d3.descending);
     //chart.render();
     dc.renderAll();
+}
 };

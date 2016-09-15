@@ -2,13 +2,14 @@ extends layout.pug
 
 block gtm
 	include includes/gtm.pug
+block facebooktracking
+	include includes/facebooktracking.pug
 block universalheader
 	include includes/universalheader.pug
 block herosection
 	include includes/herosection.pug
 block dashboard
 	if user == undefined
-		h2 Sign-in with
 		include includes/login.pug
 	else if user.id != null
 		include includes/dashboard.pug

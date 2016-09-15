@@ -4,7 +4,15 @@ var mongodb = require('mongodb');
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var connectEnsureLogin = require('connect-ensure-login');
-var oAuthConfigs = require('../config/social-configs');
+var oAuthConfigs = require('../config/social-configs-dev');
+if (process.env.NODE_ENV)
+{
+  if ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT')
+      var oAuthConfigs = require('../config/social-configs-dev');
+  else if ((process.env.NODE_ENV).toUpperCase() == 'PRODUCTION')
+      var oAuthConfigs = require('../config/social-configs-prod');
+}
+
 var userDataRepo = require("./MMMDashBL/UserDataRepository");
 
 passport.use(new Strategy({
