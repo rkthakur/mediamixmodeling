@@ -234,18 +234,14 @@ header .header-content .header-content-inner p {
         margin-right: auto;
         margin-left: auto;
         max-width: 80%;
-        font-size: 35px;
+        font-size: 25px;
 		color:#fff;
-		font-family:'Great Vibes', cursive, Arial, Helvetica, sans-serif
+		font-family:Helvetica, sans-serif, Arial
     }
 }
 
 input{
-	background-color: #e7d4ff;
     color: #5d5d5d;
-    height: 44px;
-    width: 326px;
-    margin-right: 15px;
 }
 
 .section-heading {
@@ -587,7 +583,9 @@ ul.social-logins{
 #contact{
   padding-top: 40px
 }
-
+#dashboard{
+  padding: 50px 0
+}
 
 
 

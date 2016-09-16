@@ -10,7 +10,7 @@ function makePiGraphs(error, apiData) {
 	      shareSumGroup = runDimension.group().reduceSum(function(d) {return d.share;});
  var chart = dc.pieChart("#pieChart");
 	  chart
-		  .width(600)
+		  .width(700)
 		  .height(250)
 		  //.margins({top: 10, right: 50, bottom: 30, left: 50})
 	    .slicesCap(4)
@@ -113,17 +113,17 @@ function makeGraphs(error, apiData) {
 
 
     var composite = dc.compositeChart("#composite-chart");
-
+    var wd = composite.width()
     composite
-    .width(600)
-    .height(250)
+    .width(wd)
+    .height(350)
         .x(d3.time.scale().domain([minDate, maxDate]))
         .xAxisLabel("--")
         .yAxisLabel("Sales")
         .rightYAxisLabel("Media Support",50)
         .useRightAxisGridLines(true)
         .rightY(d3.yScale)
-        .legend(dc.legend().x(100).y(230).itemHeight(13).gap(5).horizontal(true))
+        .legend(dc.legend().x(250).y(330).itemHeight(15).gap(10).horizontal(true))
         .renderHorizontalGridLines(true)
         .compose([
             dc.barChart(composite)
