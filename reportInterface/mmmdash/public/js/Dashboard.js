@@ -9,8 +9,9 @@ function makePiGraphs(error, apiData) {
 				})
 	      shareSumGroup = runDimension.group().reduceSum(function(d) {return d.share;});
  var chart = dc.pieChart("#pieChart");
+ var wd = chart.width()
 	  chart
-		  .width(700)
+		  .width(wd)
 		  .height(250)
 		  //.margins({top: 10, right: 50, bottom: 30, left: 50})
 	    .slicesCap(4)

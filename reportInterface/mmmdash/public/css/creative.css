@@ -567,7 +567,10 @@ ul.social-logins{
 
 }
 .fa:before{
-  font-size: 30px;
+  font-size: 20px;
+}
+.about-section .fa:before{
+  font-size: 40px;
 }
 .why-signin ul li{
   line-height: 25px;
@@ -581,16 +584,26 @@ ul.social-logins{
   padding: 70px 0
 }
 #contact{
-  padding-top: 40px
+  padding: 40px 0
 }
 #dashboard{
   padding: 50px 0
 }
-
-
-
-
-
+.jumbotron{
+  background: none;
+  border: 1px solid #999;
+  margin: 10px
+}
+#news .well{
+  margin: 20px 10px
+}
+.chart-wrapper{
+  padding: 0 15px;
+  overflow: hidden;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+  padding: 4px;
+}
 
 
 

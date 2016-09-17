@@ -1,30 +1,40 @@
 section#about-section.bg-dark
   .container
-    .row.about-section
+    div(class="panel-group row about-section", id="accordion", role="tablist", aria-multiselectable="true")
       .col-lg-12.text-center
         h2.section-heading Wait. What is ROMImate again?
         hr.primary
         .col-lg-4.col-md-6.text-center
-          .service-box
+          .service-box.panel-heading(role="tab", id="headingOne")
             i.fa.fa-4x.fa.fa-question-circle.wow.bounceIn.text-primary(href='#section1detail', data-rel='lightcase')
             h3 Why ROMImate
             p.text-muted Where did ROMImate come from and what are we solving here?
             br
 
-            a(href='#section1detail', data-rel='lightcase') Learn More &Rang;
+            a(href="#section1detail", role="button", data-toggle="collapse", data-parent="#accordion", aria-expanded="false", aria-controls="section1detail") Learn More &Rang;
         .col-lg-4.col-md-6.text-center
-          .service-box
+          .service-box.panel-heading(role="tab", id="headingTwo")
             i.fa.fa-4x.fa-cogs.wow.bounceIn.text-primary(href='#section3detail', data-rel='lightcase', data-wow-delay='.2s')
             h3 State Of The App
             p.text-muted How does it work? What technologies are being used today?
             br
 
-            a(href='#section3detail', data-rel='lightcase') Learn More &Rang;
+            a(href="#section2detail", role="button", data-toggle="collapse", data-parent="#accordion", aria-expanded="false", aria-controls="section2detail") Learn More &Rang;
         .col-lg-4.col-md-6.text-center
-          .service-box
+          .service-box.panel-heading(role="tab", id="headingThree")
             i.fa.fa-4x.fa-map-signs.wow.bounceIn.text-primary(href='#section4detail', data-rel='lightcase', data-wow-delay='.3s')
             h3 The Roadmap
             p.text-muted
               Where could you take ROMImate tomorrow? That&apos;s up-to-you, but we&apos;ve got some ideas that could help.
             br
-            a(href='#section2detail', data-rel='lightcase') Learn More &Rang;
+            a(href="#section3detail", role="button", data-toggle="collapse", data-parent="#accordion", aria-expanded="false", aria-controls="section3detail") Learn More &Rang;
+
+    div(id="section1detail", class="panel-collapse collapse", role="tabpanel", aria-labelledby="headingOne")
+     h3 Why ROMImate1?
+     p Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here?
+    div(id="section2detail", class="panel-collapse collapse", role="tabpanel", aria-labelledby="headingTwo")
+     h3 Why ROMImate2?
+     p Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here?
+    div(id="section3detail", class="panel-collapse collapse", role="tabpanel", aria-labelledby="headingThree")
+     h3 Why ROMImate3?
+     p Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here?
