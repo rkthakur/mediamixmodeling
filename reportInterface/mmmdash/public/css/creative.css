@@ -63,11 +63,6 @@ p {
 }
 
 
-
-.text-faded {
-    color: rgba(0,0,0,.7);
-}
-
 .no-padding {
     padding: 0;
 }
@@ -265,65 +260,7 @@ input{
     color: #ccc
 }
 
-.portfolio-box {
-    display: block;
-    position: relative;
-    margin: 0 auto;
-    max-width: 650px;
-}
 
-.portfolio-box .portfolio-box-caption {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    color: #fff;
-    opacity: 0;
-    background: rgba(240,95,64,.9);
-    -webkit-transition: all .35s;
-    -moz-transition: all .35s;
-    transition: all .35s;
-}
-
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    text-align: center;
-    transform: translateY(-50%);
-}
-
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category,
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
-    padding: 0 15px;
-    font-family: Arial,sans-serif;
-}
-
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category {
-  /*  text-transform: uppercase; */
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
-    font-size: 18px;
-}
-
-.portfolio-box:hover .portfolio-box-caption {
-    opacity: 1;
-}
-
-@media(min-width:768px) {
-    .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category {
-        font-size: 16px;
-    }
-
-    .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
-        font-size: 22px;
-    }
-}
 
 .call-to-action h2 {
     margin: 0 auto 20px;
@@ -337,67 +274,11 @@ input{
     color: #696969;
 }
 
-.encodeme {
-	color:#1a1a1a
-}
-
 .no-gutter > [class*=col-] {
     padding-right: 0;
     padding-left: 0;
 }
 
-.btn-default {
-    border-color: #fff;
-    color: #222;
-    background-color: #fff;
-    -webkit-transition: all .35s;
-    -moz-transition: all .35s;
-    transition: all .35s;
-}
-
-.btn-default:hover,
-.btn-default:focus,
-.btn-default.focus,
-.btn-default:active,
-.btn-default.active,
-.open > .dropdown-toggle.btn-default {
-    border-color: #ededed;
-    color: #222;
-    background-color: #f2f2f2;
-}
-
-.btn-default:active,
-.btn-default.active,
-.open > .dropdown-toggle.btn-default {
-    background-image: none;
-}
-
-.btn-default.disabled,
-.btn-default[disabled],
-fieldset[disabled] .btn-default,
-.btn-default.disabled:hover,
-.btn-default[disabled]:hover,
-fieldset[disabled] .btn-default:hover,
-.btn-default.disabled:focus,
-.btn-default[disabled]:focus,
-fieldset[disabled] .btn-default:focus,
-.btn-default.disabled.focus,
-.btn-default[disabled].focus,
-fieldset[disabled] .btn-default.focus,
-.btn-default.disabled:active,
-.btn-default[disabled]:active,
-fieldset[disabled] .btn-default:active,
-.btn-default.disabled.active,
-.btn-default[disabled].active,
-fieldset[disabled] .btn-default.active {
-    border-color: #fff;
-    background-color: #fff;
-}
-
-.btn-default .badge {
-    color: #fff;
-    background-color: #222;
-}
 
 .btn-primary {
     border-color: #666;
@@ -446,22 +327,9 @@ fieldset[disabled] .btn-primary.active {
     border-color: #666;
     background-color: #666;
 }
-
-.btn-primary .badge {
-    color: #666;
-    background-color: #fff;
-}
-
-.btn {
-    border: 0;
-    border-radius: 10px;
-  /*  text-transform: uppercase; */
-    font-family: Arial,sans-serif;
-    font-weight: 700;
-}
-
 .btn-xl {
     padding: 15px 30px;
+    font-size: 20px;
 }
 
 ::-moz-selection {
@@ -494,61 +362,6 @@ body {
 	cursor: pointer;
 }
 
-.cssload-loader {
-	width: 78px;
-	height: 78px;
-	position: absolute;
-	left: 50%;
-	transform: translate3d(-50%, -50%, 0);
-		-o-transform: translate3d(-50%, -50%, 0);
-		-ms-transform: translate3d(-50%, -50%, 0);
-		-webkit-transform: translate3d(-50%, -50%, 0);
-		-moz-transform: translate3d(-50%, -50%, 0);
-	perspective: 1200;
-		-o-perspective: 1200;
-		-ms-perspective: 1200;
-		-webkit-perspective: 1200;
-		-moz-perspective: 1200;
-}
-
-.cssload-flipper {
-	position: relative;
-	display: block;
-	height: inherit;
-	width: inherit;
-	animation: cssload-flip 1.38s infinite ease-in-out;
-		-o-animation: cssload-flip 1.38s infinite ease-in-out;
-		-ms-animation: cssload-flip 1.38s infinite ease-in-out;
-		-webkit-animation: cssload-flip 1.38s infinite ease-in-out;
-		-moz-animation: cssload-flip 1.38s infinite ease-in-out;
-	transform-style: preserve-3d;
-		-o-transform-style: preserve-3d;
-		-ms-transform-style: preserve-3d;
-		-webkit-transform-style: preserve-3d;
-		-moz-transform-style: preserve-3d;
-}
-
-.cssload-front,
-.cssload-back {
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: block;
-	background-color: rgb(214,112,214);
-	height: 100%;
-	width: 100%;
-	backface-visibility: hidden;
-}
-
-.cssload-back {
-	background-color: rgba(255,255,255,0.97);
-	z-index: 800;
-	transform: rotateY(-180deg);
-		-o-transform: rotateY(-180deg);
-		-ms-transform: rotateY(-180deg);
-		-webkit-transform: rotateY(-180deg);
-		-moz-transform: rotateY(-180deg);
-}
 
 /*login section
 */
@@ -592,20 +405,23 @@ ul.social-logins{
 .jumbotron{
   background: none;
   border: 1px solid #999;
-  margin: 10px
+  margin: 0px
 }
 #news .well{
   margin: 20px 10px
 }
 .chart-wrapper{
-  padding: 0 15px;
   overflow: hidden;
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
   padding: 4px;
 }
-
-
+.uploadfile fieldset{
+  width: 79%
+}
+.uploadfile .submitbtn{
+  margin-top: 20px
+}
 
 
 
@@ -672,52 +488,4 @@ ul.social-logins{
 	100% {
 		-moz-transform: perspective(375px) rotateX(-180deg) rotateY(-179.9deg);
 	}
-}
-
-.ct-series-a .ct-bar {
-  /* Colour of your bars */
-  stroke: #8888dd;
-  /* The width of your bars */
-  stroke-width: 150px;
-
-}
-.ct-series-b .ct-bar {
-  /* Colour of your bars */
-  stroke: #aaccff;
-  /* The width of your bars */
-  stroke-width: 150px;
-
-}
-.ct-series-c .ct-bar {
-  /* Colour of your bars */
-  stroke: #9988bb;
-  /* The width of your bars */
-  stroke-width: 150px;
-
-}
-.ct-series-d .ct-bar {
-  /* Colour of your bars */
-  stroke: #333;
-  /* The width of your bars */
-  stroke-width: 150px;
-
-}
-.ct-series-e .ct-bar {
-  /* Colour of your bars */
-  stroke: #9944cc;
-  /* The width of your bars */
-  stroke-width: 150px;
-
-}
-
-.chartist-tooltip {
-	background-color: rgba(255, 255, 255, 0.75);
-    color: #333;
-    width: 150px;
-    height: 70px;
-    z-index: 1000;
-    border-radius: 7px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: large;
-    position: relative;
 }

@@ -1,16 +1,20 @@
 section#dashboard.bg-bright
   .container
     .row.jumbotron.clearfix
-      .col-lg-6.col-sm-12.col-md-6
-        h2 Upload CSV Data
+      .col-lg-6.col-sm-12.col-md-6.form-group.uploadfile
+        h3 Upload CSV Data
         fieldset
           form(action='/uploadfile', method='post', enctype='multipart/form-data')
               input#Collection(name='Collection', type='hidden', value='SampleData')
-              label(for='upload') Choose file:
-              input(type='file', accept='.csv', name='uploadfile', data-buttonText='Select a File')
-              button(type='submit', name='submit') Submit
+              label(for='upload',class="control-label") Choose CVS file to upload:
+              input(type='file', accept='.csv', name='uploadfile', class="filestyle", data-buttonText='Select a File')
+              button(type='submit', name='submit',class="btn btn-primary submitbtn") Upload File
       .col-lg-6.col-sm-12
-        h2 How it works?
+        h3 How it works?
+        ul
+          li Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          li Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          li Lorem Ipsum is simply dummy text of the printing and typesetting industry.
     .row
        .col-lg-6.col-sm-12.col-md-6
          #composite-chart.u6.chart-wrapper
@@ -147,5 +151,6 @@ section#dashboard.bg-bright
           h3.chart-title Media contribution based on Media Mix Modeling
 
     .row
-      h3 Raw table data
-      #jsGrid
+      .col-lg-12.col-sm-12.col-md-12
+        h3 Raw table data
+        #jsGrid
