@@ -3,8 +3,11 @@ var regressionAnalysisModel, mixModellingModel;
 var mongodb = require('mongodb');
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
+var request = require('request');
 var connectEnsureLogin = require('connect-ensure-login');
 var oAuthConfigs = require('../config/social-configs-dev');
+var wsConfig = process.env.NODE_ENV ? ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT' ? require("../config/WsConfig")("DEV") : require("../config/WsConfig")("PROD")) : require("../config/WsConfig")("DEV");
+console.log(wsConfig);
 if (process.env.NODE_ENV) {
     if ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT')
         var oAuthConfigs = require('../config/social-configs-dev');
@@ -36,6 +39,7 @@ module.exports = function (app, MMMDash) {
     //app.use(AuthenticationMiddleware());
     app.use(passport.initialize());
     app.use(passport.session());
+    var wsDataDirty = require("./webworker")(app);
 
     /* GET home page. */
     app.get('/', function (req, res, next) {
@@ -110,7 +114,7 @@ module.exports = function (app, MMMDash) {
         var result = {};
         converter.on("end_parsed", function (jsonObj) {
             MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName, function (err, collection) {
-                collection.remove({}, function (err, removed) { });
+                collection.remove({}, function (err, removed) { MMMDash.IsDataDirty = true; });
             });
             for (var newRowData in jsonObj) {
                 var _data = jsonObj[newRowData];
@@ -161,8 +165,9 @@ module.exports = function (app, MMMDash) {
         var _id = req.body._id;
         delete req.body._id;
         console.log(req.body);
-        console.log("MMMDash.userDataCollectionName)." + MMMDash.userDataCollectionName);
+        MMMDash.Is
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": _id }, req.body, function (err, result) {
+            MMMDash.IsDataDirty = true;
             res.send(result);
         });
     });
@@ -171,6 +176,7 @@ module.exports = function (app, MMMDash) {
         var _id = req.body._id;
         delete req.body._id;
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).delete({ "_id": new ObjectId(_id) }, function (err, result) {
+            MMMDash.IsDataDirty = true;
             console.log("deleteTableData=> " + err ? err : result);
             res.send(result);
         });
@@ -179,10 +185,24 @@ module.exports = function (app, MMMDash) {
         console.log("In insertTableData : " + JSON.stringify(req.body));
         var _data = req.body;
         _data._id = String(new ObjectId());
+
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).insert(_data, function (err, result) {
+            MMMDash.IsDataDirty = true;
             console.log("insertTableData=> " + err ? err : result);
             res.send(result);
         });
     });
     /*=========Data Grid routes ends===========*/
+
+    app.post("/api/doDataRefresh", function (req, res) {
+        MMMDash.IsDataDirty = false;
+        var http = require('http');
+        request(wsConfig.RE_WS.getConfig(), function (error, response, body) {
+            if (error) {
+                console.log(error)
+            }
+            res.send({ "error": error, "response": response, "body": body });
+        })
+    });
+
 }
