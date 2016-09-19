@@ -1,3 +1,8 @@
+############ To Do #################
+# 1. Exception Handling
+#
+#
+###################################
 import logging
 import pymongo
 from pymongo import MongoClient

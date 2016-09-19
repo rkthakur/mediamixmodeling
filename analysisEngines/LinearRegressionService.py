@@ -1,3 +1,10 @@
+############ To Do #################
+# 1. Exception Handling
+#
+#
+###################################
+
+
 from LinearRegression import runLinearRegression
 import http.server
 import socketserver
@@ -27,8 +34,13 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             model = {"code" : 99, "message" : "invalid request"}
         self.send_header("Content-type", "application/json")
         self.end_headers()
+        if 'modelResult' in model:
+            response = { "isSuccessful" : "true", "error" : { "text" : ""} }
+        else:
+            #{ "isSuccessful" : "true/false", "error" : { "text" : "error text"} }
+            response = { "isSuccessful" : "false", "error" : { "text" : ""} }
         #print(self.wfile)
-        self.wfile.write(bytes(str(model),"utf-8"))
+        self.wfile.write(bytes(str(response),"utf-8"))
         #self.wfile.close()
 
 try:
