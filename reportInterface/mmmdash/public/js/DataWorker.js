@@ -35,12 +35,12 @@
                     async: false,
                     type: "POST",
                     success: function (res) {
-                        alert("Data refreshed successful");
+                        //alert("Data refreshed successful");
                         $("#myModal").modal('hide');
                         window.location.reload(true);
                     },
                     error: function (err) {
-                        alert("Data couldn't be refreshed!");
+                        console.log("Data couldn't be refreshed!");
                     }
                 });
             }, 1000)
