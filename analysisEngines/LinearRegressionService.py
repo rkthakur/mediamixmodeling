@@ -40,7 +40,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(404)
 
 try:
-    server = http.server.HTTPServer(('localhost', PORT), MyHandler)
+    server = http.server.HTTPServer(('', PORT), MyHandler)
     print('Started http server')
     server.serve_forever()
 except KeyboardInterrupt:
