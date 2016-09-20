@@ -1,5 +1,5 @@
 ﻿MMMDash.WS = function (env) {
-    var dev_url = "http://www.dev-romimate.com:9000/", prod_url = "";
+    var dev_url = "http://www.dev-romimate.com:8000/lm", prod_url = "";
 
     var that = {};
     var _RE_WS = {};
