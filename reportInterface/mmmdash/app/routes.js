@@ -5,16 +5,8 @@ var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var request = require('request');
 var connectEnsureLogin = require('connect-ensure-login');
-var oAuthConfigs = require('../config/social-configs-dev');
 var wsConfig = process.env.NODE_ENV ? ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT' ? require("../config/WsConfig")("DEV") : require("../config/WsConfig")("PROD")) : require("../config/WsConfig")("DEV");
-console.log(wsConfig);
-if (process.env.NODE_ENV) {
-    if ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT')
-        var oAuthConfigs = require('../config/social-configs-dev');
-    else if ((process.env.NODE_ENV).toUpperCase() == 'PRODUCTION')
-        var oAuthConfigs = require('../config/social-configs-prod');
-}
-
+var oAuthConfigs = process.env.NODE_ENV ? ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT' ? require('../config/social-configs')("DEV") : require('../config/social-configs')("PROD")) : require('../config/social-configs')("DEV");
 var userDataRepo = require("./MMMDashBL/UserDataRepository");
 
 passport.use(new Strategy({
@@ -164,9 +156,15 @@ module.exports = function (app, MMMDash) {
         console.log("In editTableData : " + JSON.stringify(req.body));
         var _id = req.body._id;
         delete req.body._id;
-        console.log(req.body);
+        var _param = { "TDate": null, "TV": null, "Radio": null, "Newspaper": null, "Sales": null };
+        _param.TDate = req.body.TDate;
+        _param.Newspaper = parseFloat(req.body.Newspaper);
+        _param.Radio = parseFloat(req.body.Radio);
+        _param.TV = parseFloat(req.body.TV);
+        _param.Sales = parseFloat(req.body.Sales);
+
         MMMDash.Is
-        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": _id }, req.body, function (err, result) {
+        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": _id }, _param, function (err, result) {
             MMMDash.IsDataDirty = true;
             res.send(result);
         });
