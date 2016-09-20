@@ -35,13 +35,9 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         self.send_header("Content-type", "application/json")
         self.end_headers()
         if 'modelResult' in model:
-            response = { "isSuccessful" : "true", "error" : { "text" : ""} }
+            self.send_response(200)
         else:
-            #{ "isSuccessful" : "true/false", "error" : { "text" : "error text"} }
-            response = { "isSuccessful" : "false", "error" : { "text" : ""} }
-        #print(self.wfile)
-        self.wfile.write(bytes(str(response),"utf-8"))
-        #self.wfile.close()
+            self.send_response(404)
 
 try:
     server = http.server.HTTPServer(('localhost', PORT), MyHandler)

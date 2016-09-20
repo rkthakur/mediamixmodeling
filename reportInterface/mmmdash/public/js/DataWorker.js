@@ -1,5 +1,5 @@
 ﻿(function () {
-    var dataWs = new WebSocket("ws://www.dev-romimate.com:8088/dataAnalysis");
+    var dataWs = new WebSocket("ws://www.romimate.com/dataAnalysis");
     dataWs.onclose = function (event) {
         console.log(event);
     };
@@ -36,7 +36,7 @@
                     url: "/api/doDataRefresh",
                     async: false,
                     type: "POST",
-                    success: function (res) {                       
+                    success: function (res) {
                         //alert("Data refreshed successful");
                         $("#myModal").modal('hide');
                         window.location.reload(true);

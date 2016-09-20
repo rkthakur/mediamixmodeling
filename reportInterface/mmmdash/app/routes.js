@@ -26,7 +26,7 @@ passport.use(new googleStrategy({
     callbackURL: oAuthConfigs.google.CallbackURL
   },
   function(accessToken, refreshToken, profile, cb) {
-      return cb(null, profile);  
+      return cb(null, profile);
   }
 ));
 passport.use(new twitterStrategy({
@@ -34,7 +34,7 @@ passport.use(new twitterStrategy({
     consumerSecret: oAuthConfigs.twitter.TWITTER_APP_SECRET,
     callbackURL: oAuthConfigs.twitter.CallbackURL
   },
-  function(token, tokenSecret, profile, cb) {   
+  function(token, tokenSecret, profile, cb) {
       return cb(null, profile);
   }
 ));
@@ -44,7 +44,7 @@ passport.use(new linkedInStrategy({
     callbackURL: oAuthConfigs.linkedin.CallbackURL
   },
   function(token, tokenSecret, profile, done) {
-      return done(null,profile);    
+      return done(null,profile);
   }
 ));
 passport.serializeUser(function (user, cb) { cb(null, user); });
@@ -87,7 +87,7 @@ module.exports = function (app, MMMDash) {
           res.redirect("/");
       });
 	app.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
- 
+
 	  app.get('/login/google/return', passport.authenticate('google', { failureRedirect: '/' }),
 	function(req, res) {
 	   MMMDash.user = req.user;
@@ -260,11 +260,11 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         //console.log(requestURL)
         request(requestURL, function (error, response, body) {
             MMMDash.IsDataDirty = false;
-            console.log("doDataRefresh isSuccessful=>", JSON.parse(body).isSuccessful);
-            if (JSON.parse(body).isSuccessful == false) {
-                console.log(error);
-                MMMDash.IsDataDirty = true;
-                res.statusCode = 503;
+            console.log("doDataRefresh isSuccessful=>", response);
+            if (response.statusCode != 200) {
+              console.log(error);
+              MMMDash.IsDataDirty = true;
+              res.statusCode = 503;
             }
             res.send({ "body": body });
         })
