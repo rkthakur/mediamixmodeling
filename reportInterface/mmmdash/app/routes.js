@@ -2,14 +2,17 @@ var regressionAnalysisModel, mixModellingModel;
 
 var mongodb = require('mongodb');
 var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
+var facebookStrategy = require('passport-facebook').Strategy;
+var googleStrategy = require('passport-google-oauth20').Strategy;
+var twitterStrategy = require('passport-twitter').Strategy;
+var linkedInStrategy = require('passport-linkedin').Strategy;
 var request = require('request');
 var connectEnsureLogin = require('connect-ensure-login');
 var wsConfig = process.env.NODE_ENV ? ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT' ? require("../config/WsConfig")("DEV") : require("../config/WsConfig")("PROD")) : require("../config/WsConfig")("DEV");
 var oAuthConfigs = process.env.NODE_ENV ? ((process.env.NODE_ENV).toUpperCase() == 'DEVELOPMENT' ? require('../config/social-configs')("DEV") : require('../config/social-configs')("PROD")) : require('../config/social-configs')("DEV");
 var userDataRepo = require("./MMMDashBL/UserDataRepository");
 
-passport.use(new Strategy({
+passport.use(new facebookStrategy({
     clientID: oAuthConfigs.facebook.FACEBOOK_APP_ID,
     clientSecret: oAuthConfigs.facebook.FACEBOOK_APP_SECRET,
     callbackURL: oAuthConfigs.facebook.CallbackURL,
@@ -17,7 +20,33 @@ passport.use(new Strategy({
 }, function (accessToken, refreshToken, profile, cb) {
     return cb(null, profile);
 }));
-
+passport.use(new googleStrategy({
+	  clientID: oAuthConfigs.google.GOOGLE_APP_ID,
+    clientSecret: oAuthConfigs.google.GOOGLE_APP_SECRET,
+    callbackURL: oAuthConfigs.google.CallbackURL
+  },
+  function(accessToken, refreshToken, profile, cb) {
+      return cb(null, profile);  
+  }
+));
+passport.use(new twitterStrategy({
+    consumerKey:  oAuthConfigs.twitter.TWITTER_APP_ID,
+    consumerSecret: oAuthConfigs.twitter.TWITTER_APP_SECRET,
+    callbackURL: oAuthConfigs.twitter.CallbackURL
+  },
+  function(token, tokenSecret, profile, cb) {   
+      return cb(null, profile);
+  }
+));
+passport.use(new linkedInStrategy({
+    consumerKey: oAuthConfigs.linkedin.LINKEDIN_APP_ID,
+    consumerSecret: oAuthConfigs.linkedin.LINKEDIN_APP_SECRET,
+    callbackURL: oAuthConfigs.linkedin.CallbackURL
+  },
+  function(token, tokenSecret, profile, done) {
+      return done(null,profile);    
+  }
+));
 passport.serializeUser(function (user, cb) { cb(null, user); });
 passport.deserializeUser(function (obj, cb) { cb(null, obj); });
 
@@ -57,7 +86,40 @@ module.exports = function (app, MMMDash) {
           mixModellingModel = require('./models/MixModellingViews');
           res.redirect("/");
       });
+	app.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
+ 
+	  app.get('/login/google/return', passport.authenticate('google', { failureRedirect: '/' }),
+	function(req, res) {
+	   MMMDash.user = req.user;
+          var _userRepo = new userDataRepo(MMMDash);
+          regressionAnalysisModel = require('./models/RegressionAnalysisViews');
+          mixModellingModel = require('./models/MixModellingViews');
+    // Successful authentication, redirect home.
 
+    res.redirect('/');
+  });
+
+  app.get('/login/twitter',passport.authenticate('twitter'));
+
+app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedirect: '/' }),
+  function(req, res) {
+	   MMMDash.user = req.user;
+          var _userRepo = new userDataRepo(MMMDash);
+          regressionAnalysisModel = require('./models/RegressionAnalysisViews');
+          mixModellingModel = require('./models/MixModellingViews');
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+   app.get('/auth/linkedin',passport.authenticate('linkedin'));
+   app.get('/login/linkedin/return', passport.authenticate('linkedin', { failureRedirect: '/' }),
+  function(req, res) {
+	   MMMDash.user = req.user;
+          var _userRepo = new userDataRepo(MMMDash);
+          regressionAnalysisModel = require('./models/RegressionAnalysisViews');
+          mixModellingModel = require('./models/MixModellingViews');
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
     app.get('/logout', function (req, res) {
         console.log('logging out');
         req.logout();
