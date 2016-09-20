@@ -26,9 +26,10 @@
 				"ProfileFields": ['id', 'displayName', 'email']
             },
             production: {
-                "ConsumerKey": "",
-                "ConsumerSecret": "",
-                "CallbackURL": ""
+                "TWITTER_APP_ID": "Mg3RgmWRGjjvFkgE1O8XGHiml",
+				"TWITTER_APP_SECRET": "3X7k8NrPI3s7PK6j9MKWIpmphOMBCjwdzRnWYUMvep6IDoHeG2",
+				"CallbackURL": "http://www.romimate.com/login/twitter/return",
+				"ProfileFields": ['id', 'displayName', 'email']
             }
         }
         return env === "DEV" ? _config.development : _config.production;
@@ -42,9 +43,10 @@
 				"ProfileFields": ['id', 'displayName', 'email']
             },
             production: {
-                "ConsumerKey": "",
-                "ConsumerSecret": "",
-                "CallbackURL": ""
+                "LINKEDIN_APP_ID": "814z3eizcb1qww",
+				"LINKEDIN_APP_SECRET": "oF3LUQWvsPdpzA5s",
+				"CallbackURL": "http://www.romimate.com/login/linkedin/return",
+				"ProfileFields": ['id', 'displayName', 'email']
             }
         }
         return env === "DEV" ? _config.development : _config.production;
@@ -58,9 +60,10 @@
 				"ProfileFields": ['id', 'displayName', 'email']
             },
             production: {
-                "ConsumerKey": "",
-                "ConsumerSecret": "",
-                "CallbackURL": ""
+               "GOOGLE_APP_ID": "776082858590-p7dlmdhlh2rusi8fg61dbfhatqfp71ca.apps.googleusercontent.com",
+				"GOOGLE_APP_SECRET": "ozMDrv1ZvyIJAUi6mvA8xObw",
+				"CallbackURL": "http://www.romimate.com/login/google/return",
+				"ProfileFields": ['id', 'displayName', 'email']
             }
         }
         return env === "DEV" ? _config.development : _config.production;
