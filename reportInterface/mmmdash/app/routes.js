@@ -193,13 +193,17 @@ module.exports = function (app, MMMDash) {
     /*=========Data Grid routes ends===========*/
 
     app.post("/api/doDataRefresh", function (req, res) {
-        MMMDash.IsDataDirty = false;
+
         var http = require('http');
         request(wsConfig.RE_WS.getConfig(), function (error, response, body) {
-            if (error) {
-                console.log(error)
+            MMMDash.IsDataDirty = false;
+            console.log("doDataRefresh isSuccessful=>", JSON.parse(body).isSuccessful);
+            if (JSON.parse(body).isSuccessful == false) {
+                console.log(error);
+                MMMDash.IsDataDirty = true;
+                res.statusCode = 503;
             }
-            res.send({ "error": error, "response": response, "body": body });
+            res.send({ "body": body });
         })
     });
 

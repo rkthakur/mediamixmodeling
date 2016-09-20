@@ -28,19 +28,21 @@
     $(document).ready(function () {
         $("#btnDataRefresh").bind("click", function () {
             $("#myModal").modal('show');
+            $("#errorBar").hide();
+            $("#successbar").show();
             $("#data-validation-notification").slideUp(0);
             setTimeout(function () {
                 $.ajax({
                     url: "/api/doDataRefresh",
                     async: false,
                     type: "POST",
-                    success: function (res) {
-                        alert("Data refreshed successful");
+                    success: function (res) {                       
                         $("#myModal").modal('hide');
                         window.location.reload(true);
                     },
                     error: function (err) {
-                        alert("Data couldn't be refreshed!");
+                        $("#errorBar").show();
+                        $("#successbar").hide();
                     }
                 });
             }, 1000)

@@ -26,6 +26,8 @@ footer
 					h4.modal-title Regression Analysis is in progress
 				.modal-body
 					div.progress.progress-striped.active
-						div.progress-bar.progress-bar-success(role='progressbar', style='width:100%')
-							| In Prgoress, Please don't refresh the page forcefull.
+						div.progress-bar.progress-bar-success(id="successbar" role='progressbar', style='width:100%')
+							| In Prgoress, Please don't refresh the page forcefully.
+						div.progress-bar.progress-bar-danger(id="errorBar" role='progressbar', style='width:100%; display:none')
+							| Service not available!
 					
