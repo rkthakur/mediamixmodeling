@@ -1,7 +1,7 @@
 ﻿module.exports = function (app) {
     app.ws('/dataAnalysis', function (ws, req) {
         ws.on('message', function (msg) {
-            console.log(JSON.stringify({ "IsDataDirty": MMMDash.IsDataDirty }));
+            //console.log(JSON.stringify({ "IsDataDirty": MMMDash.IsDataDirty }));
             ws.send(JSON.stringify({ "IsDataDirty": MMMDash.IsDataDirty }));
         });
         ws.on("open", function (ws, req) {

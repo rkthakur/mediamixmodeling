@@ -194,8 +194,9 @@ module.exports = function (app, MMMDash) {
 
     app.post("/api/doDataRefresh", function (req, res) {
 
-        var http = require('http');
-        request(wsConfig.RE_WS.getConfig(), function (error, response, body) {
+        requestURL=wsConfig.RE_WS.getConfig()+"?uid="+req.user.id;
+        //console.log(requestURL)
+        request(requestURL, function (error, response, body) {
             MMMDash.IsDataDirty = false;
             console.log("doDataRefresh isSuccessful=>", JSON.parse(body).isSuccessful);
             if (JSON.parse(body).isSuccessful == false) {

@@ -37,6 +37,7 @@
                     async: false,
                     type: "POST",
                     success: function (res) {                       
+                        //alert("Data refreshed successful");
                         $("#myModal").modal('hide');
                         window.location.reload(true);
                     },
