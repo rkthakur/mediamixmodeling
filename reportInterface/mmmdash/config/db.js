@@ -5,7 +5,16 @@ module.exports = MMMDash.db = {
     connectionObj: mongoose.createConnection(connString),
     isUserDataCollectionExist: function (collectionName) {
         MMMDash.db.connectionObj.db.collectionNames(function (err, names) {
-            return (names.indexOf(collectionName) > -1 ? true : false);
+          var existsFlag = false;
+            for (i=0; i < names.length;i++)
+            {
+              if (collectionName.localeCompare(names[i].name) == 0)
+              {
+                existsFlag = true;
+                break;
+              }
+            }
+            return existsFlag;
         });
     }
 }

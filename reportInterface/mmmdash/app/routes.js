@@ -227,6 +227,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
 
         MMMDash.Is
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": _id }, _param, function (err, result) {
+            if (err) console.log("editTableData : "+err);
             MMMDash.IsDataDirty = true;
             res.send(result);
         });
