@@ -147,7 +147,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
 
     app.get('/api/modeldata', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         // use mongoose to get all nerds in the database
-        var cursor = MMMDash.db.connectionObj.db.collection(MMMDash.userMixModelCollectionName).find();
+        var cursor = MMMDash.db.connectionObj.db.collection(MMMDash.userMixModelCollectionName).find({"isActive" : "YES"});
         var dataArray = [];
         cursor.each(function (err, doc) {
             if (doc != null) {
