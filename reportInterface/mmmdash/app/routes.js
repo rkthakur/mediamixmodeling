@@ -220,10 +220,10 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         delete req.body._id;
         var _param = { "TDate": null, "TV": null, "Radio": null, "Newspaper": null, "Sales": null };
         _param.TDate = req.body.TDate;
-        _param.Newspaper = parseFloat(req.body.Newspaper);
-        _param.Radio = parseFloat(req.body.Radio);
-        _param.TV = parseFloat(req.body.TV);
-        _param.Sales = parseFloat(req.body.Sales);
+        _param.Newspaper = (isNaN(parseFloat(req.body.Newspaper)) ? 0 : parseFloat(req.body.Newspaper));
+        _param.Radio = (isNaN(parseFloat(req.body.Radio)) ? 0 : parseFloat(req.body.Radio));
+        _param.TV = (isNaN(parseFloat(req.body.TV)) ? 0 : parseFloat(req.body.TV));
+        _param.Sales = (isNaN(parseFloat(req.body.Sales)) ? 0 : parseFloat(req.body.Sales));
 
         MMMDash.Is
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": _id }, _param, function (err, result) {
