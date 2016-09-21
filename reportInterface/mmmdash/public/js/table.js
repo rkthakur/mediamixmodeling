@@ -2,7 +2,7 @@ var monthNames = ["January", "February", "March", "April", "May", "June","July",
 var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 queue().defer(d3.json, "/api/data").await(tableGraph);
 function tableGraph(error, apiData) {
-  if (apiData != undefined)
+  if (apiData != undefined && apiData.length > 0)
   {
   var dateFormat = d3.time.format("%m/%d/%Y");
 	apiData.forEach(function(d) {

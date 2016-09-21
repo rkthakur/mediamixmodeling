@@ -125,6 +125,8 @@ var tableData = function () {
             success: function (res) {
                 //debugger;
                 /* Printing summary data */
+                if (res.length > 0)
+                {
                 $("#mix-model-summary-console tr td[data-attr-data-name]").each(function (index, ele) {
                     var attrName = $(ele).attr("data-attr-data-name");
                     var attrValue = res[0].summary.head[attrName];
@@ -155,6 +157,7 @@ var tableData = function () {
                         $(ele).html(attrValue);
                     }
                 });
+              }
 
             },
             error: function (err, xhr) {

@@ -84,7 +84,7 @@ module.exports = function (app, MMMDash) {
           var _userRepo = new userDataRepo(MMMDash);
           regressionAnalysisModel = require('./models/RegressionAnalysisViews');
           mixModellingModel = require('./models/MixModellingViews');
-          res.redirect("/");
+          res.redirect("/#dashboard");
       });
 	app.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
 
@@ -96,7 +96,7 @@ module.exports = function (app, MMMDash) {
           mixModellingModel = require('./models/MixModellingViews');
     // Successful authentication, redirect home.
 
-    res.redirect('/');
+    res.redirect('/#dashboard');
   });
 
   app.get('/login/twitter',passport.authenticate('twitter'));
@@ -108,7 +108,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
           regressionAnalysisModel = require('./models/RegressionAnalysisViews');
           mixModellingModel = require('./models/MixModellingViews');
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/#dashboard');
   });
    app.get('/auth/linkedin',passport.authenticate('linkedin'));
    app.get('/login/linkedin/return', passport.authenticate('linkedin', { failureRedirect: '/' }),
@@ -118,12 +118,12 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
           regressionAnalysisModel = require('./models/RegressionAnalysisViews');
           mixModellingModel = require('./models/MixModellingViews');
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/#dashboard');
   });
     app.get('/logout', function (req, res) {
-        console.log('logging out');
+        //console.log('logging out');
         req.logout();
-        res.redirect('/');
+        res.redirect('/#page-top');
     });
     /*End: authentication routes*/
     // sample api route
@@ -173,7 +173,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
             for (var newRowData in jsonObj) {
                 var _data = jsonObj[newRowData];
                 _data._id = String(new ObjectId());
-                console.log(_data);
+                //console.log(_data);
                 MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName).insert(_data, function (err, inserted) {
                     console.log("Data inserted " + JSON.stringify(inserted));
                     console.log("Data inserted error " + err);
@@ -182,7 +182,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
             res.writeHead(302, { 'Location': '/' });
             fs.unlink(req.file.path, function (err) {
                 if (err) return console.log(err);
-                console.log('file deleted successfully');
+                //console.log('file deleted successfully');
             });
             res.end();
         });
@@ -215,7 +215,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         });
     });
     app.post("/api/editTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-        console.log("In editTableData : " + JSON.stringify(req.body));
+        //console.log("In editTableData : " + JSON.stringify(req.body));
         var _id = req.body._id;
         delete req.body._id;
         var _param = { "TDate": null, "TV": null, "Radio": null, "Newspaper": null, "Sales": null };
@@ -232,23 +232,23 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         });
     });
     app.post("/api/deleteTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-        console.log("In deleteTableData : " + JSON.stringify(req.body));
+        //console.log("In deleteTableData : " + JSON.stringify(req.body));
         var _id = req.body._id;
         delete req.body._id;
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).delete({ "_id": new ObjectId(_id) }, function (err, result) {
             MMMDash.IsDataDirty = true;
-            console.log("deleteTableData=> " + err ? err : result);
+            //console.log("deleteTableData=> " + err ? err : result);
             res.send(result);
         });
     });
     app.post("/api/insertTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-        console.log("In insertTableData : " + JSON.stringify(req.body));
+      //  console.log("In insertTableData : " + JSON.stringify(req.body));
         var _data = req.body;
         _data._id = String(new ObjectId());
 
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).insert(_data, function (err, result) {
             MMMDash.IsDataDirty = true;
-            console.log("insertTableData=> " + err ? err : result);
+            //console.log("insertTableData=> " + err ? err : result);
             res.send(result);
         });
     });
@@ -260,7 +260,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         //console.log(requestURL)
         request(requestURL, function (error, response, body) {
             MMMDash.IsDataDirty = false;
-            console.log("doDataRefresh isSuccessful=>", response);
+            //console.log("doDataRefresh isSuccessful=>", response);
             if (response.statusCode != 200) {
               console.log(error);
               MMMDash.IsDataDirty = true;

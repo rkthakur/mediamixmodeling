@@ -1,7 +1,7 @@
 queue().defer(d3.json, "/api/data").await(makeGraphs);
 queue().defer(d3.json, "/api/modeldata").await(makePiGraphs);
 function makePiGraphs(error, apiData) {
-  if (apiData != undefined)
+  if (apiData != undefined && apiData.length > 0)
   {
  var ndx   = crossfilter(apiData[0].modelResult),
 	      runDimension  = ndx.dimension(function(d) {
@@ -48,7 +48,7 @@ function makePiGraphs(error, apiData) {
 };
 
 function makeGraphs(error, apiData) {
-  if (apiData != undefined)
+  if (apiData != undefined && apiData.length > 0)
   {
 //Start Transformations
 	var dataSet = apiData;

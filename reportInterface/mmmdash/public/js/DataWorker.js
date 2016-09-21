@@ -21,7 +21,7 @@
         }
     };
     dataWs.onopen = function (event) {
-        console.log(event);
+        //console.log(event);
     };
     setInterval(function () {
         dataWs.send("Ping-" + (new Date()).getMilliseconds());
