@@ -1,15 +1,19 @@
-.row.jumbotron.clearfix
-  .col-lg-6.col-sm-12.col-md-6.form-group.uploadfile
-    h3 Upload CSV Data
-    fieldset
-      form(action='/uploadfile', method='post', enctype='multipart/form-data')
-          input#Collection(name='Collection', type='hidden', value='SampleData')
-          label(for='upload',class="control-label") Choose CVS file to upload:
-          input(type='file', accept='.csv', name='uploadfile', class="filestyle", data-buttonText='Select a File')
-          button(type='submit', name='submit',class="btn btn-primary submitbtn") Upload File
-  .col-lg-6.col-sm-12
-    h3 How it works?
-    ul
-      li Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      li Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      li Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+div.uploadsection
+  .row.uploadbtn
+    a(class="btn btn-md collapsed", role="button", data-toggle="collapse", href="#uploadData", aria-expanded="false", aria-controls="uploadData") Upload Your Own Data
+  .row.uploadcsv
+    .jumbotron.collapse.clearfix#uploadData
+      .col-lg-6.col-sm-12.col-md-6.form-group.uploadfile
+        h3 Upload Data
+        fieldset
+          form(action='/uploadfile', method='post', enctype='multipart/form-data')
+              input#Collection(name='Collection', type='hidden', value='SampleData')
+              label(for='upload',class="control-label") Choose CVS file to upload:
+              input(type='file', accept='.csv', name='uploadfile', class="filestyle", data-buttonText='Select a File')
+              button(type='submit', name='submit',class="btn btn-primary submitbtn") Upload File
+      .col-lg-6.col-sm-12
+        h3 How it works?
+        ul
+          li Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          li Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          li Lorem Ipsum is simply dummy text of the printing and typesetting industry.
