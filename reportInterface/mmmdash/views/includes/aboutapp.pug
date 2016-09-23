@@ -11,7 +11,7 @@ section#about.bg-dark
             p.text-muted Where did ROMImate come from and what are we solving here?
             br
 
-            a(href="#section1detail", role="button", data-toggle="collapse", data-parent="#accordion", aria-expanded="false", aria-controls="section1detail") Learn More &Rang;
+            a(href="#section1detail", role="button",  data-controls="section1detail") Learn More &Rang;
         .col-lg-4.col-md-6.text-center
           .service-box.panel-heading(role="tab", id="headingTwo")
             i.fa.fa-4x.fa-cogs.wow.bounceIn.text-primary(href='#section3detail', data-rel='lightcase', data-wow-delay='.2s')
@@ -19,7 +19,7 @@ section#about.bg-dark
             p.text-muted How does it work? What technologies are being used today?
             br
 
-            a(href="#section2detail", role="button", data-toggle="collapse", data-parent="#accordion", aria-expanded="false", aria-controls="section2detail") Learn More &Rang;
+            a(href="#section2detail", role="button", data-controls="section2detail") Learn More &Rang;
         .col-lg-4.col-md-6.text-center
           .service-box.panel-heading(role="tab", id="headingThree")
             i.fa.fa-4x.fa-map-signs.wow.bounceIn.text-primary(href='#section4detail', data-rel='lightcase', data-wow-delay='.3s')
@@ -27,14 +27,16 @@ section#about.bg-dark
             p.text-muted
               Where could you take ROMImate tomorrow? That&apos;s up-to-you, but we&apos;ve got some ideas that could help.
             br
-            a(href="#section3detail", role="button", data-toggle="collapse", data-parent="#accordion", aria-expanded="false", aria-controls="section3detail") Learn More &Rang;
+            a(href="#section3detail", role="button", data-controls="section3detail") Learn More &Rang;
 
-    div(id="section1detail", class="panel-collapse collapse", role="tabpanel", aria-labelledby="headingOne")
+section#aboutresult.bg-bright
+  .container
+    div(id="section1detail", class="jumbotron aboutresult")
      h3 Why ROMImate1?
      p Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here?
-    div(id="section2detail", class="panel-collapse collapse", role="tabpanel", aria-labelledby="headingTwo")
+    div(id="section2detail", class="jumbotron aboutresult")
      h3 Why ROMImate2?
      p Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here?
-    div(id="section3detail", class="panel-collapse collapse", role="tabpanel", aria-labelledby="headingThree")
+    div(id="section3detail", class="jumbotron aboutresult")
      h3 Why ROMImate3?
      p Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here? Where did ROMImate come from and what are we solving here?
