@@ -81,13 +81,13 @@ def modelToJson(lm,data):
         "aic": lm.aic,
         "datetime": curr_datetime,
         "bic": lm.bic,
-        "f_statistic": "lm.F-statistic",
+        "f_statistic": lm.f_pvalue,
         "df_model": lm.df_model,
         "dep_var": dependentVariable,
         "features": features,
         "no_of_observations": data.shape[0] - 1,
         "rsquared": lm.rsquared,
-        "llf": lm.llf,
+        "log_likelihood": lm.llf,
         "model": "OLS",
         "rsquared_adj": lm.rsquared_adj,
         "df_resid": lm.df_resid,
@@ -111,6 +111,7 @@ def storeModel(model, uid):
     result = db[col_mixModel].insert_one(model)
     result = db[col_mixModel].update_many({},{"$set" : {"isActive": "NO"}})
     result = db[col_mixModel].update_many({"_id": model['_id']},{"$set" : {"isActive": "YES"}})
+    result = db[col_mixModel].delete_many({"isActive": "NO"})
     #db.getCollection('mixModels').find({}).sort({_id:-1}).limit(1)
     return model
 
