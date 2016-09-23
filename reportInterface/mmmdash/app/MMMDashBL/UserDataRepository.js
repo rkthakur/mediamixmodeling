@@ -7,6 +7,19 @@
         MMMDash.userMixModelCollectionName = MMMDash.user.id + "_MixModel";
 
         MMMDash.db.connectionObj.db.collectionNames(function (err, names) {
+          console.log("User Details :"+JSON.stringify(MMMDash.user));
+          MMMDash.db.connectionObj.collection('UserDataRepository').update({ "_id": MMMDash.user.id }, MMMDash.user, function (err, result) {
+  		           if (err) {console.log("Error while user profile update : "+err);}
+                 //console.log("Response of user profile update"+result);
+                 if(result == 0)
+                 {
+                    MMMDash.db.connectionObj.collection('UserDataRepository').insert({ "_id": MMMDash.user.id, "profile": MMMDash.user}, function (err, result) {
+                        if (err) {console.log("Error while user profile insert : "+err);}
+                        //console.log("Response of user profile insert"+result);
+                       });
+                  }
+                });
+
           var existsFlag = false;
             for (i=0; i < names.length;i++)
             {
