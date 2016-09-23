@@ -12,7 +12,7 @@ function makePiGraphs(error, apiData) {
  var wd = chart.width()
 	  chart
 		  .width(wd)
-		  .height(250)
+		  .height(550)
 		  //.margins({top: 10, right: 50, bottom: 30, left: 50})
 	    .slicesCap(4)
 	    .innerRadius(0)
@@ -20,7 +20,7 @@ function makePiGraphs(error, apiData) {
 	    .group(shareSumGroup)
       .ordinalColors(['DarkGreen', 'DarkKhaki', 'DarkMagenta','DarkOrange','DeepPink','DarkTurquoise'])
 	    //.legend(dc.legend());
-      .legend(dc.legend().x(0).y(0).itemHeight(13).gap(5))
+      .legend(dc.legend().x(0).y(0).autoItemWidth(true).gap(5))
 	    // workaround for #703: not enough data is accessible through .label() to display percentages
 	     .on('pretransition', function(chart) {
 	        chart.selectAll('text.pie-slice').text(function(d) { //'text.pie-slice'
@@ -122,14 +122,14 @@ function makeGraphs(error, apiData) {
     var wd = composite.width()
     composite
     .width(wd)
-    .height(350)
+    .height(550)
         .x(d3.time.scale().domain([minDate, maxDate]))
         .xAxisLabel("--")
         .yAxisLabel("Sales")
         .rightYAxisLabel("Media Support",50)
         .useRightAxisGridLines(true)
         .rightY(d3.yScale)
-        .legend(dc.legend().x(250).y(330).itemHeight(15).gap(10).horizontal(true))
+        .legend(dc.legend().x(50).y(0).itemHeight(15).gap(10).horizontal(true))
         .renderHorizontalGridLines(true)
         .compose([
             dc.barChart(composite)
