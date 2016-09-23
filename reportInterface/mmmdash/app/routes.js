@@ -227,19 +227,19 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
 
         MMMDash.Is
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": _id }, _param, function (err, result) {
-            if (err) console.log("editTableData : "+err);
-            MMMDash.IsDataDirty = true;
-            res.send(result);
+			MMMDash.IsDataDirty = true;
+            if (err) {console.log("editTableData : "+err);res.send(500);}
+			else{res.send(200);}
         });
     });
     app.post("/api/deleteTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         //console.log("In deleteTableData : " + JSON.stringify(req.body));
         var _id = req.body._id;
         delete req.body._id;
-        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).delete({ "_id": new ObjectId(_id) }, function (err, result) {
+        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).remove({ "_id": _id }, function (err, result) {
             MMMDash.IsDataDirty = true;
-            //console.log("deleteTableData=> " + err ? err : result);
-            res.send(result);
+            if (err) {console.log("deleteTableData : "+err);res.send(500);}
+			else{res.send(200);}
         });
     });
     app.post("/api/insertTableData", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
