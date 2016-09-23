@@ -111,6 +111,7 @@ def storeModel(model, uid):
     result = db[col_mixModel].insert_one(model)
     result = db[col_mixModel].update_many({},{"$set" : {"isActive": "NO"}})
     result = db[col_mixModel].update_many({"_id": model['_id']},{"$set" : {"isActive": "YES"}})
+    result = db[col_mixModel].delete_many({"isActive": "NO"})
     #db.getCollection('mixModels').find({}).sort({_id:-1}).limit(1)
     return model
 
