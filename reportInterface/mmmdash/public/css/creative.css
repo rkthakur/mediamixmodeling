@@ -8,6 +8,7 @@ html,
 body {
     width: 100%;
     height: 100%;
+    font-size: 13px;
 }
 
 body {
@@ -45,10 +46,12 @@ h6 {
     font-family: 'Oswald', Arial,sans-serif;
     margin-bottom: 25px;
 }
-
+.h3,h3{
+  font-size: 20px;
+}
 p {
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.5;
 }
 
@@ -330,9 +333,12 @@ input {
 
 .btn-xl {
     padding: 15px 30px;
-    font-size: 20px;
+    font-size: 18px;
 }
-
+.btn-md {
+    padding: 10px 20px;
+    font-size: 16px;
+}
 ::-moz-selection {
     text-shadow: none;
     color: #fff;
@@ -369,7 +375,10 @@ body {
 .loginsection {
     padding: 30px;
 }
-
+.loginsection .jumbotron {
+    padding: 20px 28px 40px 28px ;
+    margin: 10px;
+}
 ul.social-logins {
     margin: 0;
     padding: 0;
@@ -392,6 +401,7 @@ ul.social-logins {
 
 .why-signin ul li {
     line-height: 25px;
+    font-size: 16px;
 }
 
 /*About Section*/
@@ -416,7 +426,13 @@ ul.social-logins {
     border: 1px solid #999;
     margin: 0px;
 }
-
+.uploadsection .jumbotron {
+    margin: 0;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 0;
+    border-top: 0;
+}
 #news .well {
     margin: 20px 10px;
 }
@@ -436,12 +452,56 @@ ul.social-logins {
 .uploadfile .submitbtn {
     margin-top: 20px;
 }
+.uploadbtn{
+  border-bottom: 1px solid #ccc;
+}
+.uploadbtn a{
+  display: inline-block;
+  font-size: 16px;
+  padding: 15px 10px;
+  text-align: left;
+  font-weight: bold;
+}
+.uploadbtn a:before{
+  content: "\f146";
+  font-family: "FontAwesome";
+  padding-right: 5px;
+  font-size: 16px;
+}
+.uploadbtn a.collapsed:before{
+  content: "\f0fe";
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+  background: #f6f6f6;
+}
 
+.nav>li>a{
+  padding: 8px;
+}
+.caption{
+  font-weight: bold;
+  font-size: 14px;
+  padding-top: 5px;
+}
+.model{
+  background: #fff
+}
+table th{
+  background: #eee;
+}
+.jumbotron.aboutresult{
+  margin: 20px 0;
+  font-size: 14px;
+  padding: 30px 30px 20px 30px;
+  display: none;
 
-
-
-
-
+}
+.jumbotron.aboutresult p{
+  font-size: 14px;
+}
+.jumbotron.aboutresult h3{
+  margin-top: 0px;
+}
 
 
 @keyframes cssload-flip {

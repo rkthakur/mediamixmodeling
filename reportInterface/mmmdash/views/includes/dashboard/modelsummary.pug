@@ -7,44 +7,44 @@
           th(colspan='4') Ordinary Least Squares(OLS) Regression Result
       tbody
         tr
-          td Dep. Variable
+          th Dep. Variable
           td(data-attr-data-name='dep_var')
-          td R-Squared
+          th R-Squared
           td(data-attr-data-name='rsquared')
         tr
-          td Models
+          th Models
           td(data-attr-data-name='model')
-          td Adj. R-Squared
+          th Adj. R-Squared
           td(data-attr-data-name='rsquared_adj')
         tr
-          td Method
+          th Method
           td(data-attr-data-name='method')
-          td PROB (F-Statics)
+          th PROB (F-Statics)
           td(data-attr-data-name='f_statistic')
         tr
-          td DATE
+          th DATE
           td(data-attr-data-name='datetime', data-value='date')
-          td R-Squared
+          th R-Squared
           td(data-attr-data-name='rsquared')
         tr
-          td TIME
+          th TIME
           td(data-attr-data-name='datetime', data-value='time')
-          td Log-Likelihood
+          th Log-Likelihood
           td(data-attr-data-name='log_likelihood')
         tr
-          td No. Observations
+          th No. Observations
           td(data-attr-data-name='no_of_observations')
-          td AIC
+          th AIC
           td(data-attr-data-name='aic')
         tr
-          td DF. Residuals
+          th DF. Residuals
           td(data-attr-data-name='df_resid')
-          td BIC
+          th BIC
           td(data-attr-data-name='bic')
         tr
-          td DF. Model
+          th DF. Model
           td(data-attr-data-name='dep_var')
-          td Converiance Type
+          th Converiance Type
           td(data-attr-data-name='cov_type')
 
     table#mix-model-console1.table.table-bordered
@@ -57,7 +57,7 @@
             th P>|t|
             th(colspan='2') [95.0% Conf. Int.]
         tr(key='Intercept')
-          td Intercept
+          th Intercept
           td(data-attr-data-name='params')
           td(data-attr-data-name='bse')
           td(data-attr-data-name='t')
@@ -65,7 +65,7 @@
           td(data-attr-data-name='cof1')
           td(data-attr-data-name='cof2')
         tr(key='TV')
-          td TV
+          th TV
           td(data-attr-data-name='params')
           td(data-attr-data-name='bse')
           td(data-attr-data-name='t')
@@ -73,7 +73,7 @@
           td(data-attr-data-name='cof1')
           td(data-attr-data-name='cof2')
         tr(key='Radio')
-          td Radio
+          th Radio
           td(data-attr-data-name='params')
           td(data-attr-data-name='bse')
           td(data-attr-data-name='t')
@@ -81,7 +81,7 @@
           td(data-attr-data-name='cof1')
           td(data-attr-data-name='cof2')
         tr(key='Newspaper')
-          td Newspaper
+          th Newspaper
           td(data-attr-data-name='params')
           td(data-attr-data-name='bse')
           td(data-attr-data-name='t')
@@ -92,22 +92,22 @@
     table#mix-model-diagn-console.table.table-bordered
       tbody
         tr
-          td Omnibus
+          th Omnibus
           td(data-attr-data-name='omni')
-          td Durbin-Watson
+          th Durbin-Watson
           td(data-attr-data-name='mineigval')
         tr
-          td Prob (Omnibus)
+          th Prob (Omnibus)
           td(data-attr-data-name='omnipv')
-          td Jarque-Bera JB
+          th Jarque-Bera JB
           td(data-attr-data-name='jbpv')
         tr
-          td Skew
+          th Skew
           td(data-attr-data-name='skew')
-          td Prob JB
+          th Prob JB
           td(data-attr-data-name='jb')
         tr
-          td Kurtosis
+          th Kurtosis
           td(data-attr-data-name='kurtosis')
-          td condno
+          th condno
           td(data-attr-data-name='condno')
