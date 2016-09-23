@@ -68,11 +68,7 @@ module.exports = function (app, MMMDash) {
     });
 
     app.get('/login', function (req, res) {
-        if (!req.isAuthenticated()) {
-            res.sendfile('./public/login.html');
-        } else {
-            res.sendfile('./public/index1.html');
-        }
+        res.redirect("/#dashboard");
         //res.render('login');
     });
 
@@ -141,8 +137,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
     });
 
     app.get('/dashboard', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-        //res.sendfile("./public/dashboard.html");
-        res.sendfile("./public/index1.html");
+        res.redirect("/#dashboard");
     });
 
     app.get('/api/modeldata', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
@@ -160,26 +155,31 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
 
     /*=========Upload File route Starts*/
     app.post("/uploadfile", connectEnsureLogin.ensureLoggedIn(), upload.single('uploadfile'), function (req, res, next) {
-
+      console.log("Upload called");
         var dataArray = [];
         var _headerData = {};
         var _index = 0;
         var rs = fs.createReadStream(req.file.path);
+        console.log("Upload called after fs read");
         var result = {};
         converter.on("end_parsed", function (jsonObj) {
             MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName, function (err, collection) {
-                collection.remove({}, function (err, removed) { MMMDash.IsDataDirty = true; });
+                collection.remove({}, function (err, removed) {
+                  if(err) console.log("collection remove error"+err);
+                  console.log("collection remove called");
+                  MMMDash.IsDataDirty = true;
+                });
             });
             for (var newRowData in jsonObj) {
                 var _data = jsonObj[newRowData];
                 _data._id = String(new ObjectId());
                 //console.log(_data);
-                MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName).insert(_data, function (err, inserted) {
-                    console.log("Data inserted " + JSON.stringify(inserted));
-                    console.log("Data inserted error " + err);
+                MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).insert(_data, function (err, inserted) {
+                  console.log("Data inserted " + JSON.stringify(inserted));
+                    //console.log("Data inserted error " + err);
                 });
             }
-            res.writeHead(302, { 'Location': '/' });
+            res.writeHead(301, { 'Location': '/#dashboard' });
             fs.unlink(req.file.path, function (err) {
                 if (err) return console.log(err);
                 //console.log('file deleted successfully');
