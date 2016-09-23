@@ -143,6 +143,34 @@ var tableData = function () {
                 });
                 /*End printing summary data*/
                 /*Priting Diagn data*/
+                $("#mix-model-console1 tr[key] td[data-attr-data-name]").each(function (index, ele) {
+                    var attrName = $(ele).attr("data-attr-data-name");
+                    var params = res[0].summary.values.params;
+                    var pvalues = res[0].summary.values.pvalues;
+                    var bse = res[0].summary.values.bse;
+                    var conf_int = res[0].summary.values.conf_int;
+                    var key = ele.parentElement.attributes['key'].value;//innerText.trim();
+                    if (attrName == "params")
+                    {
+                      var attrValue = params[key];
+                    }
+                    if (attrName == "bse")
+                    {
+                      var attrValue = bse[key];
+                    }
+                    if (attrName == "cof1")
+                    {
+                      var attrValue = conf_int[0][key];
+                    }
+                    if (attrName == "cof2")
+                    {
+                      var attrValue = conf_int[1][key];
+                    }
+                    if (attrValue) {
+                      $(ele).html(attrValue);
+                    }
+                });
+                /*Priting Diagn data*/
                 $("#mix-model-diagn-console tr td[data-attr-data-name]").each(function (index, ele) {
                     var attrName = $(ele).attr("data-attr-data-name");
                     var attrValue = res[0].summary.diagn[attrName];
