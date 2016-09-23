@@ -225,7 +225,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         _param.TV = (isNaN(parseFloat(req.body.TV)) ? 0 : parseFloat(req.body.TV));
         _param.Sales = (isNaN(parseFloat(req.body.Sales)) ? 0 : parseFloat(req.body.Sales));
 
-        MMMDash.Is
+        //MMMDash.Is
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": _id }, _param, function (err, result) {
 			MMMDash.IsDataDirty = true;
             if (err) {console.log("editTableData : "+err);res.send(500);}
@@ -237,8 +237,8 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         var _id = req.body._id;
         delete req.body._id;
         MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).remove({ "_id": _id }, function (err, result) {
-            MMMDash.IsDataDirty = true;
-            if (err) {console.log("deleteTableData : "+err);res.send(500);}
+        MMMDash.IsDataDirty = true;
+        if (err) {console.log("deleteTableData : "+err);res.send(500);}
 			else{res.send(200);}
         });
     });

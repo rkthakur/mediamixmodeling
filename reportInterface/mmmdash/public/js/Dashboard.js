@@ -45,6 +45,11 @@ function makePiGraphs(error, apiData) {
 */
 	//  chart.render();
 }
+else {
+  {
+    $("#pieChart").html("Media mix model is not available to show pie chart. Please use refesh model button to run regression analysis.");
+  }
+}
 };
 
 function makeGraphs(error, apiData) {

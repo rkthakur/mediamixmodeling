@@ -158,6 +158,9 @@ var tableData = function () {
                     }
                 });
               }
+              else {
+                $("#model-table").html("Model Summary Does not exsist. Please use refesh model button to run regression analysis.");
+              }
 
             },
             error: function (err, xhr) {

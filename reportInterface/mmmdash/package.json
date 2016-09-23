@@ -19,7 +19,7 @@
     "fs": "0.0.1-security",
     "method-override": "~2.0.2",
     "mongodb": "^2.2.9",
-    "mongoose": "~3.8.0",
+    "mongoose": "^3.8.40",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
     "node-worker": "0.0.2",

@@ -53,5 +53,32 @@
 
         });
     });
+/** Even to handle Manual Refresh Model */
+$(document).ready(function () {
+    $("#btnDataRefreshManual").bind("click", function () {
+        $("#myModal").modal('show');
+        $("#errorBar").hide();
+        $("#successbar").show();
+        $("#data-validation-notification").slideUp(0);
+        setTimeout(function () {
+            $.ajax({
+                url: "/api/doDataRefresh",
+                async: false,
+                type: "POST",
+                success: function (res) {
+                    //alert("Data refreshed successful");
+                    $("#myModal").modal('hide');
+                    window.location.reload(true);
+                },
+                error: function (err) {
+                    $("#errorBar").show();
+                    $("#successbar").hide();
+                }
+            });
+        }, 1000)
+
+    });
+});
+
 
 })();

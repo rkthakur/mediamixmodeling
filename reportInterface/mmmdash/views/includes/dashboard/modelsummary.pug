@@ -1,0 +1,115 @@
+.col-lg-6.col-sm-12.col-md-6
+  #model-table.u6.chart-wrapper
+    h3.chart-title Model summary
+    table#mix-model-summary-console.table.table-bordered
+      thead
+        tr
+          th(colspan='4') OLS Regression Result
+      tbody
+        tr
+          td Dep. Variable
+          td(data-attr-data-name='dep_var')
+          td R-Squared
+          td(data-attr-data-name='rsquared')
+        tr
+          td Models
+          td(data-attr-data-name='model')
+          td Adj. R-Squared
+          td(data-attr-data-name='rsquared_adj')
+        tr
+          td Method
+          td(data-attr-data-name='method')
+          td PROB (F-Statics)
+          td(data-attr-data-name='prob_f_statistic')
+        tr
+          td DATE
+          td(data-attr-data-name='datetime', data-value='date')
+          td R-Squared
+          td(data-attr-data-name='rsquared')
+        tr
+          td TIME
+          td(data-attr-data-name='datetime', data-value='time')
+          td Log-Likelihood
+          td(data-attr-data-name='log_likelihood')
+        tr
+          td No. Observations
+          td(data-attr-data-name='no_of_observations')
+          td AIC
+          td(data-attr-data-name='aic')
+        tr
+          td DF. Residuals
+          td(data-attr-data-name='df_resid')
+          td BIC
+          td(data-attr-data-name='bic')
+        tr
+          td DF. Model
+          td(data-attr-data-name='dep_var')
+          td
+          td(data-attr-data-name='')
+        tr
+          td Converiance Type
+          td(data-attr-data-name='cov_type')
+          td
+          td(data-attr-data-name='')
+      tfoot
+        tr
+          th
+          th
+          th
+          th
+    table#mix-model-console1.table.table-bordered
+      tbody
+        tr
+          td Inercept
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+        tr
+          td TV
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+        tr
+          td Radio
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+        tr
+          td Newspaper
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+          td(data-attr-data-name='dep_var')
+    table#mix-model-diagn-console.table.table-bordered
+      tbody
+        tr
+          td Omnibus
+          td(data-attr-data-name='omni')
+          td Durbin-Watson
+          td(data-attr-data-name='mineigval')
+        tr
+          td Prob (Omnibus)
+          td(data-attr-data-name='omnipv')
+          td Jarque-Bera JB
+          td(data-attr-data-name='jbpv')
+        tr
+          td Skew
+          td(data-attr-data-name='skew')
+          td Prob JB
+          td(data-attr-data-name='jb')
+        tr
+          td Kurtosis
+          td(data-attr-data-name='kurtosis')
+          td condno
+          td(data-attr-data-name='condno')
