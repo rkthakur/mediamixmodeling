@@ -1,4 +1,5 @@
 var regressionAnalysisModel, mixModellingModel;
+var session = require("express-session");
 var Converter = require("csvtojson").Converter;
 var mongodb = require('mongodb');
 var passport = require('passport');
@@ -77,7 +78,7 @@ module.exports = function (app, MMMDash) {
     app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/' }),
       function (req, res) {
           MMMDash.user = req.user;
-          var _userRepo = new userDataRepo(MMMDash);
+          var _userRepo = new userDataRepo(MMMDash,req);
           regressionAnalysisModel = require('./models/RegressionAnalysisViews');
           mixModellingModel = require('./models/MixModellingViews');
           res.redirect("/#dashboard");
@@ -87,7 +88,7 @@ module.exports = function (app, MMMDash) {
 	  app.get('/login/google/return', passport.authenticate('google', { failureRedirect: '/' }),
 	function(req, res) {
 	   MMMDash.user = req.user;
-          var _userRepo = new userDataRepo(MMMDash);
+          var _userRepo = new userDataRepo(MMMDash,req);
           regressionAnalysisModel = require('./models/RegressionAnalysisViews');
           mixModellingModel = require('./models/MixModellingViews');
     // Successful authentication, redirect home.
@@ -100,7 +101,7 @@ module.exports = function (app, MMMDash) {
 app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedirect: '/' }),
   function(req, res) {
 	   MMMDash.user = req.user;
-          var _userRepo = new userDataRepo(MMMDash);
+          var _userRepo = new userDataRepo(MMMDash,req);
           regressionAnalysisModel = require('./models/RegressionAnalysisViews');
           mixModellingModel = require('./models/MixModellingViews');
     // Successful authentication, redirect home.
@@ -110,7 +111,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
    app.get('/login/linkedin/return', passport.authenticate('linkedin', { failureRedirect: '/' }),
   function(req, res) {
 	   MMMDash.user = req.user;
-          var _userRepo = new userDataRepo(MMMDash);
+          var _userRepo = new userDataRepo(MMMDash,req);
           regressionAnalysisModel = require('./models/RegressionAnalysisViews');
           mixModellingModel = require('./models/MixModellingViews');
     // Successful authentication, redirect home.
@@ -125,7 +126,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
     // sample api route
     app.get('/api/data', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         //
-        var cursor = MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName).find({}, { '_id': 0, 'TDate': 1, 'TV': 1, 'Newspaper': 1, 'Radio': 1, 'Sales': 1 });
+        var cursor = MMMDash.db.connectionObj.db.collection(req.session.passport.user.id + "_Data").find({}, { '_id': 0, 'TDate': 1, 'TV': 1, 'Newspaper': 1, 'Radio': 1, 'Sales': 1 });
         var dataArray = [];
         cursor.each(function (err, doc) {
             if (doc != null) {
@@ -142,7 +143,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
 
     app.get('/api/modeldata', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
         // use mongoose to get all nerds in the database
-        var cursor = MMMDash.db.connectionObj.db.collection(MMMDash.userMixModelCollectionName).find({"isActive" : "YES"});
+        var cursor = MMMDash.db.connectionObj.db.collection(req.session.passport.user.id + "_MixModel").find({"isActive" : "YES"});
         var dataArray = [];
         cursor.each(function (err, doc) {
             if (doc != null) {
@@ -164,7 +165,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         var result = {};
         converter = new Converter({});
         converter.on("end_parsed", function (jsonObj) {
-            MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName, function (err, collection) {
+            MMMDash.db.connectionObj.db.collection(req.session.passport.user.id + "_Data", function (err, collection) {
                 collection.remove({}, function (err, removed) {
                   if(err) console.log("collection remove error"+err);
                   console.log("collection remove called");
@@ -175,7 +176,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
                 var _data = jsonObj[newRowData];
                 _data._id = String(new ObjectId());
                 //console.log(_data);
-                MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).insert(_data, function (err, inserted) {
+                MMMDash.db.connectionObj.collection(req.session.passport.user.id + "_Data").insert(_data, function (err, inserted) {
                   console.log("Data inserted " + JSON.stringify(inserted));
                     //console.log("Data inserted error " + err);
                 });
@@ -207,7 +208,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
 
     /*=========Data Grid routes starts=========*/
     app.get("/api/tabledata", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-        var cursor = MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).find();
+        var cursor = MMMDash.db.connectionObj.collection(req.session.passport.user.id + "_Data").find();
         var dataArray = [];
         cursor.each(function (err, doc) {
             if (doc != null) {
@@ -229,7 +230,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         _param.Sales = (isNaN(parseFloat(req.body.Sales)) ? 0 : parseFloat(req.body.Sales));
 
         //MMMDash.Is
-        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).update({ "_id": _id }, _param, function (err, result) {
+        MMMDash.db.connectionObj.collection(req.session.passport.user.id + "_Data").update({ "_id": _id }, _param, function (err, result) {
 			MMMDash.IsDataDirty = true;
             if (err) {console.log("editTableData : "+err);res.send(500);}
 			else{res.send(200);}
@@ -239,7 +240,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         //console.log("In deleteTableData : " + JSON.stringify(req.body));
         var _id = req.body._id;
         delete req.body._id;
-        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).remove({ "_id": _id }, function (err, result) {
+        MMMDash.db.connectionObj.collection(req.session.passport.user.id + "_Data").remove({ "_id": _id }, function (err, result) {
         MMMDash.IsDataDirty = true;
         if (err) {console.log("deleteTableData : "+err);res.send(500);}
 			else{res.send(200);}
@@ -250,7 +251,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         var _data = req.body;
         _data._id = String(new ObjectId());
 
-        MMMDash.db.connectionObj.collection(MMMDash.userDataCollectionName).insert(_data, function (err, result) {
+        MMMDash.db.connectionObj.collection(req.session.passport.user.id + "_Data").insert(_data, function (err, result) {
             MMMDash.IsDataDirty = true;
             //console.log("insertTableData=> " + err ? err : result);
             res.send(result);
@@ -260,7 +261,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
 
     app.post("/api/doDataRefresh", function (req, res) {
 
-        requestURL=wsConfig.RE_WS.getConfig()+"?uid="+req.user.id;
+        requestURL=wsConfig.RE_WS.getConfig()+"?uid="+req.session.passport.user.id ;
         //console.log(requestURL)
         request(requestURL, function (error, response, body) {
             MMMDash.IsDataDirty = false;

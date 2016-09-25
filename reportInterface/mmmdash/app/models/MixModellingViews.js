@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-userDataCollection = mongoose.model(MMMDash.userDataCollectionName, new Schema({
+userDataCollection = mongoose.model(MMMDash.userDataCollectionName , new Schema({
     "TDate": String,
     "TV": Number,
     "Radio": Number,
