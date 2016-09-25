@@ -40,7 +40,7 @@
     app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
     app.use(require('morgan')('combined'));
 
-    converter = new Converter({});
+  //  converter = new Converter({});
     upload = multer({ dest: 'uploads/', rename: function (fieldname, filename) { return "temp"; } });
 
     require('./app/routes')(app, MMMDash); // pass our application into our routes

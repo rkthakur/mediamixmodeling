@@ -1,5 +1,5 @@
 var regressionAnalysisModel, mixModellingModel;
-
+var Converter = require("csvtojson").Converter;
 var mongodb = require('mongodb');
 var passport = require('passport');
 var facebookStrategy = require('passport-facebook').Strategy;
@@ -162,6 +162,7 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         var rs = fs.createReadStream(req.file.path);
         console.log("Upload called after fs read");
         var result = {};
+        converter = new Converter({});
         converter.on("end_parsed", function (jsonObj) {
             MMMDash.db.connectionObj.db.collection(MMMDash.userDataCollectionName, function (err, collection) {
                 collection.remove({}, function (err, removed) {
@@ -184,11 +185,13 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
                 if (err) return console.log(err);
                 //console.log('file deleted successfully');
             });
+            console.log('end_parsed done');
             res.end();
         });
 
         //record_parsed will be emitted each time a row has been parsed.
         converter.on("record_parsed", function (resultRow, rawRow, rowIndex) {
+          console.log('inside record_parsed ');
             for (var key in resultRow) {
                 if (!result[key] || !result[key] instanceof Array) {
                     result[key] = [];
