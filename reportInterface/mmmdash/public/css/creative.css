@@ -54,7 +54,9 @@ p {
     font-size: 14px;
     line-height: 1.5;
 }
-
+li {
+  line-height: 1.75;
+}
 .bg-dark {
     color: #F8F8F8;
     background-color: #303030;
