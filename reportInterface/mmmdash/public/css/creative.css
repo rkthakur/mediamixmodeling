@@ -589,3 +589,8 @@ table th{
     color: #fff;
     text-align: center;
 }
+.fb_iframe_widget_fluid,.fb_iframe_widget_fluid iframe,.fb_iframe_widget_fluid span{
+  width:100%!important;
+  overflow: hidden;
+
+}
