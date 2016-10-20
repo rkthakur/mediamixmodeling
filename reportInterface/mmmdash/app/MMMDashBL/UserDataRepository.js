@@ -21,9 +21,11 @@
           var existsFlag = false;
             for (i=0; i < names.length;i++)
             {
-              //  console.log(req.session.passport.user.id + "_Data" +" COL "+names[i].name);
-              if (req.session.passport.user.id + "_Data".localeCompare(names[i].name) == 0)
+              console.log(req.session.passport.user.id + "_Data" +" COL "+names[i].name);
+              var colname=req.session.passport.user.id + "_Data";
+              if (colname.localeCompare(names[i].name) == 0)
               {
+                console.log(names[i].name+" Found!!");
                 existsFlag = true;
                 break;
               }
