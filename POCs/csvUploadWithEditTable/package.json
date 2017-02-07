@@ -1,0 +1,15 @@
+{
+  "name": "starter-node-angular",
+  "main": "server.js",
+  "version": "1.0.1",
+  "dependencies": {
+    "body-parser": "~1.4.2",
+    "express": "~4.5.1",
+    "express-session": "^1.14.1",
+    "method-override": "~2.0.2",
+    "mongodb": "^2.2.8",
+    "mongoose": "~3.8.0",
+    "multer": "^1.2.0",
+    "ya-csv": "^0.9.4"
+  }
+}

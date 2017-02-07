@@ -1,0 +1,25 @@
+div.uploadsection
+  .row.uploadbtn
+    a(class="btn btn-md collapsed", role="button", data-toggle="collapse", href="#uploadData", aria-expanded="false", aria-controls="uploadData") Upload Your Own Data
+  .row.uploadcsv
+    .jumbotron.collapse.clearfix#uploadData
+      .col-lg-6.col-sm-12.col-md-6.form-group.uploadfile
+        h3 Upload Data
+        fieldset
+          form(action='/uploadfile', method='post', enctype='multipart/form-data')
+              input#Collection(name='Collection', type='hidden', value='SampleData')
+              label(for='upload',class="control-label") Choose CVS file to upload:
+              input(type='file', accept='.csv', name='uploadfile', class="filestyle", data-buttonText='Select a File')
+              button(type='submit', name='submit',class="btn btn-primary submitbtn") Upload File
+      .col-lg-6.col-sm-12
+        h3 How it works?
+        ul
+          li We have uploaded some sample data in your dashboard that you can use to play with.
+          li Or, Download a sample CSV file from our :
+            a(href='https://github.com/rkthakur/mediamixmodeling/tree/development/SampleDataSet', target='_blank') Sample Data Set repository.
+          li Add your data in sample CSV file or create your own. At the moment ROMImate supports only following predefined attributes:
+            ul
+              li TDate,TV,Radio,Newspaper,Sales
+              li Date value in "TDate" field must be in "mm/dd/yyyy" format.
+          li Upload your sample data and see media mix modeling result with details of model summary generated from your data.
+          li You can play with your data in Data Table Section of this interface.

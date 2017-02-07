@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Rakesh Thakur">
+    <title>ROIMmate -  Marketing Investment Measurement</title>
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Oswald" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" type="text/css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+    <link rel="stylesheet" href="css/dc.css" />
+    <link rel="stylesheet" href="css/stylenew.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+
+
+</head>
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">ROMImate</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                      <a class="page-scroll" href="/login/facebook">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#demo">Try ROMImate</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About the app</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#news">News & Update</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#commit">Source Code</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1>AN OPEN SOURCE FRAMEWORK BUILT TO MEASURE EFFECTIVNESS OF MEDIA IN MARKETING TACTICS</h1>
+                <hr>
+                <p>ROMImate is a open source frameworks ......leveraging principles of semiotics to .......
+                  Return on Marketing Investment, Measurement, Analysis, Assessment, Media, Media Mix Modeling
+                    Media planning and strategy
+                </p>
+                <a href="#demo" class="btn btn-primary btn-xl page-scroll">Try ROMImate Now!</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-bright" id="demo">
+        <div class="container">
+            <div class="row">
+                    <h2 class="section-heading">ROMImate Live Demonstration</h2>
+                    <hr class="light">
+                    <div id="botinput">
+                    <p id="preinputtext" class="text-faded">
+                    {Little about action and end result of demo}
+                   </p>
+                   {Complete Dashboard goes here}
+
+                    </div>
+                    <div id="botloader" style="display:none;padding-top: 45px;height:120px;">
+
+                	<div class="cssload-loader">
+						<div class="cssload-flipper">
+							<div class="cssload-front"></div>
+							<div class="cssload-back"></div>
+						</div>
+					</div>
+					</div>
+
+                     <div id="botresult" class="ct-chart ct-double-octave" style="display:none">
+
+                     </div>
+                     <i href="#whatisthis" data-rel="lightcase" class="fa fa-lg fa-info-circle text-primary" style="color:white;">&nbsp;<span style="font-size:0.7em">I don't understand this. Tell me more.</span></i>
+                            </div>
+
+                            <div class="row">
+                                <h2>Upload CSV Data</h2>
+                                <fieldset>
+                                    <legend>Upload CSV File</legend>
+                                    <form action="/uploadfile" method="post" enctype="multipart/form-data">
+                                        <input name="Collection" id="Collection" type="hidden" value="SampleData" />
+                                        <label for="upload">Choose file:</label>
+                                        <input type="file" accept=".csv" name="uploadfile" />
+                                        <button type="submit" name="submit">Submit</button>
+                                    </form>
+                                </fieldset>
+                            </div>
+
+                            <div class="row">
+                                <div class="4u chart-wrapper" id="composite-chart">
+                                    <div class="chart-title bold"> <strong> Media Volume</strong></div>
+                                  </div>
+                                  <div class="4u chart-wrapper" id="data-table">
+                                      <div class="chart-title bold"> <strong>Media Support </strong></div>
+                                      <table id="sampledatatable" class="rwd-table" border=1>
+                                          <thead>
+                                              <tr>
+                                                  <th>Month</th>
+                                                  <th>Sales Vol.</th>
+                                                  <th>TV</th>
+                                                  <th>Radio</th>
+                                                  <th>Newspaper</th>
+                                              </tr>
+                                          </thead>
+                                      </table>
+                                  </div>
+                            </div>
+                            <div class="row">
+                                <div class="6u chart-wrapper" id="model-table">
+                                    <div class="chart-title bold">  <strong> Model </strong> </div>
+                                    <table id="mix-model-summary-console" class="console-data">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="4">OLS Regression Result</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Dep. Variable</td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td>R-Squared</td>
+                                                <td data-attr-data-name="rsquared"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Models</td>
+                                                <td data-attr-data-name="model"></td>
+                                                <td>Adj. R-Squared</td>
+                                                <td data-attr-data-name="rsquared_adj"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Method</td>
+                                                <td data-attr-data-name="method"></td>
+                                                <td>PROB (F-Statics)</td>
+                                                <td data-attr-data-name="prob_f_statistic"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>DATE</td>
+                                                <td data-attr-data-name="datetime" data-value="date"></td>
+                                                <td>R-Squared</td>
+                                                <td data-attr-data-name="rsquared"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>TIME</td>
+                                                <td data-attr-data-name="datetime" data-value="time"></td>
+                                                <td>Log-Likelihood</td>
+                                                <td data-attr-data-name="log_likelihood"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>No. Observations</td>
+                                                <td data-attr-data-name="no_of_observations"></td>
+                                                <td>AIC</td>
+                                                <td data-attr-data-name="aic"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>DF. Residuals</td>
+                                                <td data-attr-data-name="df_resid"></td>
+                                                <td>BIC</td>
+                                                <td data-attr-data-name="bic"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>DF. Model</td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td></td>
+                                                <td data-attr-data-name=""></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Converiance Type</td>
+                                                <td data-attr-data-name="cov_type"></td>
+                                                <td></td>
+                                                <td data-attr-data-name=""></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <table id="mix-model-console1" class="console-data">
+                                        <tbody>
+                                            <tr>
+                                                <td>Inercept</td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>TV</td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Radio</td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Newspaper</td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                                <td data-attr-data-name="dep_var"></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <table id="mix-model-diagn-console" class="console-data">
+                                        <tbody>
+                                            <tr>
+                                                <td>Omnibus</td>
+                                                <td data-attr-data-name="omni"></td>
+                                                <td>Durbin-Watson</td>
+                                                <td data-attr-data-name="mineigval"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Prob (Omnibus)</td>
+                                                <td data-attr-data-name="omnipv"></td>
+                                                <td>Jarque-Bera JB</td>
+                                                <td data-attr-data-name="jbpv"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Skew</td>
+                                                <td data-attr-data-name="skew"></td>
+                                                <td>Prob JB</td>
+                                                <td data-attr-data-name="jb"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Kurtosis</td>
+                                                <td data-attr-data-name="kurtosis"></td>
+                                                <td>condno</td>
+                                                <td data-attr-data-name="condno"></td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="6u chart-wrapper" id="pieChart">
+                                    <div class="chart-title bold">  <strong> Media contribution based on Media Mix Modeling </strong> </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <h2>Raw table data</h2>
+                                <div id="jsGrid"></div>
+                            </div>
+
+
+
+
+
+        </div>
+        	<div style="display:none" id="whatisthis">
+			<h4>Don't Understand?</h4>
+			{Instruction to Kick start}
+			<ul>
+				<li>About Chart1</li>
+				<li>About Chart...</li>
+			</ul>
+			If you want to learn more, download the <a target="_blank" href="thewhitepaper.pdf">ROMImate <span style="background-color:black;color:white;">whitepaper</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-2x fa-download text-secondary"></i></a>.
+        	</div>
+    </section>
+    <a href="#error" style="display:none" id="demoerror"></a>
+	<div id="error" style="display:none">
+	<h4>Oops!</h4>
+	<p>{Error Message}.</p>
+	</div>
+    <section id="about" class="bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Wait.  What is ROMImate again?</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i href="#section1detail" data-rel="lightcase" class="fa fa-4x fa-question-circle wow bounceIn text-primary"></i>
+                        <h3>Why ROMImate</h3>
+                        <p class="text-muted">Where did ROMImate come from and what are we solving here?</p>
+                        <br/>
+                        <a href="#section1detail" data-rel="lightcase">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i href="#section2detail" data-rel="lightcase" class="fa fa-4x fa-puzzle-piece wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3>Making Sense Of It </h3>
+                        <p class="text-muted">{About App}</p>
+                        <br/>
+                        <a href="#section2detail" data-rel="lightcase" >Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i href="#section3detail" data-rel="lightcase" class="fa fa-4x fa-code-fork wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                      <h3>State Of The App</h3>
+                        <p class="text-muted">How does it work?  What technologies are being used today?</p>
+                        <br/>
+                        <a href="#section3detail" data-rel="lightcase">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i href="#section4detail" data-rel="lightcase" class="fa fa-4x fa-map-signs wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3>The Roadmap</h3>
+                        <p class="text-muted">Where could you take ROMImate tomorrow?  That&#x27;s up-to-you, but we&#x27;ve got some ideas that could help.</p>
+                        <br/>
+                        <a href="#section4detail" data-rel="lightcase">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	<div style="display:none" id="section1detail">
+		<a style="float:right" target="_blank" href="thewhitepaper.pdf">download ROMImate <span style="background-color:black;color:white;">whitepaper</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-2x fa-download text-secondary"></i></a>
+
+		<p class="encodeme">&lt;h4&gt;Why ROMImate?&lt;/h4&gt;
+&lt;br style=&quot;height:10px;&quot;&gt;&amp;nbsp;&lt;/br&gt;
+&lt;i&gt;Before we answer that, let&#x27;s talk global for sec...&lt;/i&gt;
+	</div>
+	<div style="display:none" id="section2detail">
+		<a style="float:right" target="_blank" href="thewhitepaper.pdf">download ROMImate <span style="background-color:black;color:white;">whitepaper</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-2x fa-download text-secondary"></i></a>
+
+		<p class="encodeme">&lt;h4&gt;Making Sense Of It&lt;/h4&gt;
+&lt;br style=&quot;height:10px;&quot;&gt;&amp;nbsp;&lt;/br&gt;
+&lt;h5&gt;2.1	The Hypothesis&lt;/h5&gt;
+</div>
+	<div style="display:none" id="section3detail">
+		<a style="float:right" target="_blank" href="thewhitepaper.pdf">download ROMImate <span style="background-color:black;color:white;">whitepaper</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-2x fa-download text-secondary"></i></a>
+
+		<p class="encodeme">&lt;h4&gt;The State Of The Bot&lt;/h4&gt;
+&lt;br style=&quot;height:10px;&quot;&gt;&amp;nbsp;&lt;/br&gt;
+&lt;i&gt;Quick Note: Any references to figures or tables are available in the
+	</div>
+	<div style="display:none" id="section4detail">
+<a style="float:right" target="_blank" href="thewhitepaper.pdf">download ROMImate <span style="background-color:black;color:white;">whitepaper</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-2x fa-download text-secondary"></i></a>
+
+		<p class="encodeme">&lt;h4&gt;The Bot&#x27;s Roadmap&lt;/h4&gt;
+&lt;br style=&quot;height:10px;&quot;&gt;&amp;nbsp;&lt;/br&gt;
+&lt;i&gt;Quick Note: Any references to figures or tables are available in the &lt;a href=&quot;thewhitepaper.pdf&quot; target=&quot;_blank&quot;&gt;downloadable whitepaper&lt;/a&gt;.&lt;/i&gt;	</div>
+
+
+<section class="no-padding" id="news" class="bg-bright">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="col-lg-4 col-sm-6">
+                    News Update#1
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    News Update#2
+                </div>
+
+                <div class="col-lg-4 col-sm-6">
+                    News Update#2
+                </div>
+        				<br/>
+            </div>
+        </div>
+    </section>
+    <aside class="bg-dark" id="commit" class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>Commit To Helping, Literally. <br/> Download ROMImate on GitHub</h2>
+                <a href="https://github.com/rkthakur/mediamixmodeling" class="btn btn-default btn-xl tada">View On GitHub</a>
+            </div>
+        </div>
+    </aside>
+
+    <section id="contact" class="bg-bright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p>Want to learn even more, or interesting in having a ROMImate discussion at your event? Send us an email and we will get back to you as soon as possible!</p>
+                </div>
+                <div class="col-lg-3 col-lg-offset-3 text-center">
+                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p><a href="mailto:rthakur@sapient.com">rthakur@sapient.com</a></p>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <i class="fa fa-twitter fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p><a href="https://twitter.com/rakeshweb">@rakeshweb</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src='js/crossfilter.js' type='text/javascript'></script>
+    <script src='js/d3.js' type='text/javascript'></script>
+    <script src='http://dc-js.github.io/dc.js/js/dc.js' type='text/javascript'></script>
+    <script src='js/queue.js' type='text/javascript'></script>
+    <script src='js/Dashboard.js' type='text/javascript'></script>
+    <script src='js/table.js' type='text/javascript'></script>
+
+    <link type="text/css" rel="stylesheet" href="css/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/jsgrid-theme.min.css" />
+
+    <script type="text/javascript" src="js/jsgrid.min.js"></script>
+    <script type="text/javascript" src="js/TableData.js"></script>
+</body>
+
+</html>

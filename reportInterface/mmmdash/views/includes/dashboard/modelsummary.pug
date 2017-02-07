@@ -1,0 +1,113 @@
+.col-lg-6.col-sm-12.col-md-6
+  #model-table.u6.chart-wrapper
+    h3.chart-title Model summary
+    table#mix-model-summary-console.table.table-bordered
+      thead
+        tr
+          th(colspan='4') Ordinary Least Squares(OLS) Regression Result
+      tbody
+        tr
+          th Dep. Variable
+          td(data-attr-data-name='dep_var')
+          th R-Squared
+          td(data-attr-data-name='rsquared')
+        tr
+          th Models
+          td(data-attr-data-name='model')
+          th Adj. R-Squared
+          td(data-attr-data-name='rsquared_adj')
+        tr
+          th Method
+          td(data-attr-data-name='method')
+          th PROB (F-Statics)
+          td(data-attr-data-name='f_statistic')
+        tr
+          th DATE
+          td(data-attr-data-name='datetime', data-value='date')
+          th R-Squared
+          td(data-attr-data-name='rsquared')
+        tr
+          th TIME
+          td(data-attr-data-name='datetime', data-value='time')
+          th Log-Likelihood
+          td(data-attr-data-name='log_likelihood')
+        tr
+          th No. Observations
+          td(data-attr-data-name='no_of_observations')
+          th AIC
+          td(data-attr-data-name='aic')
+        tr
+          th DF. Residuals
+          td(data-attr-data-name='df_resid')
+          th BIC
+          td(data-attr-data-name='bic')
+        tr
+          th DF. Model
+          td(data-attr-data-name='dep_var')
+          th Converiance Type
+          td(data-attr-data-name='cov_type')
+
+    table#mix-model-console1.table.table-bordered
+      tbody
+        tr
+            th
+            th coef
+            th std err
+            th t
+            th P>|t|
+            th(colspan='2') [95.0% Conf. Int.]
+        tr(key='Intercept')
+          th Intercept
+          td(data-attr-data-name='params')
+          td(data-attr-data-name='bse')
+          td(data-attr-data-name='t')
+          td(data-attr-data-name='p')
+          td(data-attr-data-name='cof1')
+          td(data-attr-data-name='cof2')
+        tr(key='TV')
+          th TV
+          td(data-attr-data-name='params')
+          td(data-attr-data-name='bse')
+          td(data-attr-data-name='t')
+          td(data-attr-data-name='p')
+          td(data-attr-data-name='cof1')
+          td(data-attr-data-name='cof2')
+        tr(key='Radio')
+          th Radio
+          td(data-attr-data-name='params')
+          td(data-attr-data-name='bse')
+          td(data-attr-data-name='t')
+          td(data-attr-data-name='p')
+          td(data-attr-data-name='cof1')
+          td(data-attr-data-name='cof2')
+        tr(key='Newspaper')
+          th Newspaper
+          td(data-attr-data-name='params')
+          td(data-attr-data-name='bse')
+          td(data-attr-data-name='t')
+          td(data-attr-data-name='p')
+          td(data-attr-data-name='cof1')
+          td(data-attr-data-name='cof2')
+
+    table#mix-model-diagn-console.table.table-bordered
+      tbody
+        tr
+          th Omnibus
+          td(data-attr-data-name='omni')
+          th Durbin-Watson
+          td(data-attr-data-name='mineigval')
+        tr
+          th Prob (Omnibus)
+          td(data-attr-data-name='omnipv')
+          th Jarque-Bera JB
+          td(data-attr-data-name='jbpv')
+        tr
+          th Skew
+          td(data-attr-data-name='skew')
+          th Prob JB
+          td(data-attr-data-name='jb')
+        tr
+          th Kurtosis
+          td(data-attr-data-name='kurtosis')
+          th condno
+          td(data-attr-data-name='condno')

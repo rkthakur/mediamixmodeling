@@ -1,0 +1,38 @@
+footer
+	script(type='text/javascript', src='js/common.js')
+	script(src='js/crossfilter.js', type='text/javascript')
+	script(src='js/d3.js', type='text/javascript')
+	script(src='http://dc-js.github.io/dc.js/js/dc.js', type='text/javascript')
+	script(src='js/queue.js', type='text/javascript')
+	link(type='text/css', rel='stylesheet', href='css/jsgrid.min.css')
+	link(type='text/css', rel='stylesheet', href='css/jsgrid-theme.min.css')
+	script(type='text/javascript', src='js/jsgrid.min.js')
+	script(type='text/javascript', src='js/bootstrap.min.js')
+	script(type='text/javascript', src='js/bootstrap-filestyle.min.js')
+
+
+	if user != undefined
+		if user.id != null
+			script(src='js/Dashboard.js', type='text/javascript')
+			script(src='js/table.js', type='text/javascript')
+			script(type='text/javascript', src='js/TableData.js')
+			script(type='text/javascript', src='js/DataWorker.js')
+
+
+	div(class="data-validation-notification", id="data-validation-notification", style="display:none;")
+		div(class="alert alert-warning")
+			a.close(href='#', data-dismiss='alert', aria-label='close', title='close') x
+			strong Reminder!
+			|	Your data changes are not reflected in regression model, Charts are not updated. To see the latest data on charts, Please run regression analysis.
+			button(class="btn btn-warning", id="btnDataRefresh" style="display: block;margin: auto;") Refresh Model
+	#myModal.modal.fade
+		.modal-dialog
+			.modal-content
+				.modal-header
+					h4.modal-title Regression Analysis is in progress
+				.modal-body
+					div.progress.progress-striped.active
+						div.progress-bar.progress-bar-success(id="successbar" role='progressbar', style='width:100%')
+							| In Prgoress, Please don't refresh the page forcefully.
+						div.progress-bar.progress-bar-danger(id="errorBar" role='progressbar', style='width:100%; display:none')
+							| Service not available!

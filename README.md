@@ -23,4 +23,4 @@ I propose to build a tool for basic MMM through this repository with following f
 4. Ability to edit uploaded volumetric data.
 5. NoOps and micro services principles will be followed in system design and Architecture.
 
-More to come soon....
+Insyallation Instructions - https://github.com/rkthakur/mediamixmodeling/wiki/Installation

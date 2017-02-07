@@ -1,0 +1,27 @@
+extends layout.pug
+
+block gtm
+	include includes/gtm.pug
+block facebooktracking
+	include includes/facebooktracking.pug
+block universalheader
+	include includes/universalheader.pug
+block herosection
+	include includes/herosection.pug
+block dashboard
+	if user == undefined
+		include includes/login.pug
+	else if user.id != null
+		include includes/dashboard.pug
+block aboutapp
+	include includes/aboutapp.pug
+block newsandupdate
+	include includes/newsandupdate.pug
+block sourcecode
+	include includes/sourcecode.pug
+block contact
+	include includes/contact.pug
+block universalfooter
+	include includes/universalfooter.pug
+block addthis
+	include includes/addthis.pug

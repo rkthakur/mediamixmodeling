@@ -1,0 +1,50 @@
+h3 How does it work?
+p This prototype of ROMImateis is designed to showcase a simple workflow of media mix modeling. User can play with data to see how any change in media or sales data affects models that is visualized through a pie chart. The dashboard is designed to detect any change in data and notify user to run regression analysis in the real time.
+p Other supported features at the moment are:
+ul
+ li CSV file upload: User can upload their own data in predefined format as suggested in the upload section of the dashboard to see result of modeling.
+ li Social Login: Social login with top 4 social media (Facebook,Google, Twitter and Linked-in) is supported to facilitate easy sign-up.
+ li Social Sharing: User can use social share options to share their experience on top social media.
+
+h3 What technologies are being used today?
+p The system architecture of the prototype is entirely based on serverless architecture with right blend of NoSQL database and micro services coding pattern, as shown in diagram below:
+
+img.img-responsive(src='https://raw.githubusercontent.com/rkthakur/mediamixmodeling/development/Docs/SCDTech.jpg',alt='SCD Tech Diagram')
+br
+ul
+  li
+    strong Analysis Engine:
+    |  A linear regression analysis micro service is developed in
+    |  Python to perform basic media mix modeling on collected sales and media data.
+    |  This service is an important piece of prototype. It can be used as reference to
+    |  enhance regression analysis further. Another service for Sentiment analysis is also
+    |  available as part of analysis engine though it is not used in prototype
+    |  implementation.
+  li
+    strong Report Interface:
+    |  The ROMImate report interface is entirely developed in Node.js
+    |  with extensive use of Express.js web application framework and Pug.js template
+    |  engine. Some of the key Node.js or JavaScript packages used in the construct of
+    |  ROMImate are:
+    ul
+      li Passport.js for Social login
+      li dc.js and d3.js for Charts
+      li crossfilter.js for in memory data handling
+      li More package details are available inside package.json of report interface.
+  li
+    strong  Conversion Hub:
+    |  A reference micro service is developed in Python to pull
+    |  conversion data from Google Analytics through REST API. Though this service is
+    |  not used in the prototype implementation but it can be used as a reference to
+    |  develop other service as per the need of developer.
+  li
+    strong  Media Hub:
+    |  A placeholder reference micro service is developed in Python to pull
+    |  data from a media data provider through REST API. Though this service is not used
+    |  in the prototype implementation but it can be used as a reference to develop other
+    |  service as per the need of developer.
+  li
+    strong  Database:
+    |  The ROMImate framework database is named as “mediamixmodeling”
+    |  that stores all the collections used by service hubs, analysis engine and report
+    |  interface.

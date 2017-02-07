@@ -1,0 +1,21 @@
+{   
+    "_id" : 1,
+    "date" : "2016-08-04",
+    "productID" : "40059002399070001",
+    "salesVolume" : 100,
+    "tvVolume" : 30,
+    "tvCoefficient" : 0.15,
+    "tvContribution" : 6,
+    "rNrVolume" : 30,
+    "rNrCoefficient" : 0.15,
+    "rNrContribution" : 6,
+    "sentimentVolume" : 30,
+    "sentimentCoefficient" : 0.15,
+    "sentimentContribution" : 6,
+    "searchVolume" : 30,
+    "searchCoefficient" : 0.15,
+    "searchContribution" : 6,
+    "socialLikeVolume" : 30,
+    "socialLikeCoefficient" : 0.15,
+    "socialLikeContribution" : 6
+}

@@ -1,0 +1,161 @@
+{
+  "_id": "''",
+  "gtin": "''",
+  "productCode": "''",
+  "pdpURL": "''",
+  "salesVolume": {
+    "online": {
+      "volume": [
+        {
+          "dateTime": "''",
+          "quantitySold": 0
+        }
+      ]
+    },
+    "offline": {
+      "volume": [
+        {
+          "dateTime": "''",
+          "quantitySold": 0
+        }
+      ]
+    }
+  },
+  "media": {
+    "outDoor": {
+      "volume": [
+        {
+          "impression": 0,
+          "dateTime": "''"
+        }
+      ],
+      "mediaType": "PAID"
+    },
+    "social": {
+      "volume": [
+        {
+          "impression": 0,
+          "dateTime": ""
+        }
+      ],
+      "mediaType": "PAID"
+    },
+    "faceBookEarned": {
+      "comments": [
+        {
+          "text": "Very good product",
+          "dateTime": ""
+        }
+      ],
+      "likes": [
+        {
+          "count": 0,
+          "dateTime": ""
+        }
+      ],
+      "lastSynched": "",
+      "shareCount": [
+        {
+          "count": 0,
+          "dateTime": ""
+        }
+      ],
+      "mediaType": "EARNED"
+    },
+    "print": {
+      "volume": [
+        {
+          "impression": 0,
+          "dateTime": ""
+        }
+      ],
+      "mediaType": "PAID"
+    },
+    "search": {
+      "volume": [
+        {
+          "impression": 0,
+          "dateTime": ""
+        }
+      ],
+      "mediaType": "PAID"
+    },
+    "tv": {
+      "volume": [
+        {
+          "grp": 0,
+          "dateTime": ""
+        }
+      ],
+      "mediaType": "PAID"
+    },
+    "ratingsAndReviews": {
+      "ratingSummary": "0",
+      "Reviews": [
+        {
+          "Comments": [],
+          "ParentId": 0,
+          "Deleted": null,
+          "IsNotifyAuthor": false,
+          "Created": "",
+          "Changed": "",
+          "VotesNeg": 0,
+          "Title": "",
+          "IsArchived": false,
+          "Text": "",
+          "IsInappropriate": false,
+          "MasterRating": {
+            "Name": "",
+            "Master": true,
+            "Id": "",
+            "Created": "",
+            "Changed": "",
+            "Value": "",
+            "id": ""
+          },
+          "IsBlacklistedAuthor": false,
+          "Ratings": [
+            {
+              "Name": "",
+              "Master": false,
+              "Id": "",
+              "Created": "",
+              "Changed": "",
+              "Value": "",
+              "id": ""
+            }
+          ],
+          "IsHighlighted": false,
+          "Properties": null,
+          "ThreadId": "",
+          "StreamId": "",
+          "VotesPos": 0,
+          "Id": "",
+          "IsDeleted": false,
+          "IsVerified": true,
+          "URL": "",
+          "Author": {
+            "id": "",
+            "DisplayName": "",
+            "Id": "",
+            "Created": "",
+            "Groups": [],
+            "Changed": "",
+            "IsBlacklisted": false,
+            "Attributes": null
+          },
+          "Parent": null,
+          "IsBlacklistedWords": false,
+          "id": "",
+          "State": ""
+        }
+      ],
+      "lastSynched": "",
+      "mediaType": "EARNED"
+    },
+    "pageView": {
+      "volume": [],
+      "mediaType": "OWNED"
+    }
+  }
+}

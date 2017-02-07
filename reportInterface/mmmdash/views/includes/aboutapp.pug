@@ -1,0 +1,39 @@
+section#about.bg-dark
+  .container
+    div(class="panel-group row about-section", id="accordion", role="tablist", aria-multiselectable="true")
+      .col-lg-12.text-center
+        h2.section-heading Want to learn more about ROMImate?
+        hr.primary
+        .col-lg-4.col-md-6.text-center
+          .service-box.panel-heading(role="tab", id="headingOne")
+            i.fa.fa-4x.fa.fa-question-circle.wow.bounceIn.text-primary(data-rel='lightcase')
+            h3 Why ROMImate
+            p.text-muted What is the purpose of ROMImate and what are we solving here?
+            br
+            a(href="#section1detail", role="button",  data-controls="section1detail") Learn More &Rang;
+        .col-lg-4.col-md-6.text-center
+          .service-box.panel-heading(role="tab", id="headingTwo")
+            i.fa.fa-4x.fa-cogs.wow.bounceIn.text-primary(data-rel='lightcase', data-wow-delay='.2s')
+            h3 State Of The Framework
+            p.text-muted How does it work? What technologies are being used today?
+            br
+
+            a(href="#section2detail", role="button", data-controls="section2detail") Learn More &Rang;
+        .col-lg-4.col-md-6.text-center
+          .service-box.panel-heading(role="tab", id="headingThree")
+            i.fa.fa-4x.fa-map-signs.wow.bounceIn.text-primary(data-rel='lightcase', data-wow-delay='.3s')
+            h3 The Roadmap
+            p.text-muted Where could you take ROMImate tomorrow?
+            br
+            a(href="#section3detail", role="button", data-controls="section3detail") Learn More &Rang;
+
+section#aboutresult.bg-bright
+  .container
+    div(id="section1detail", class="jumbotron aboutresult")
+     h3 Why ROMImate?
+     p The main goal is to improve quality of measurement in marketing through better use of latest technology. To achieve this goal, I strongly believe, marketing industry needs to attract more technologists to innovate and develop tools and techniques to improve processes of marketing. Therefore, the primary purpose of ROMImate is to facilitate learning of technologists and promote research and development in the field of agile marketing investment measurement.
+    div(id="section2detail", class="jumbotron aboutresult")
+     include content/technologiesused.pug
+
+    div(id="section3detail", class="jumbotron aboutresult")
+     include content/roadmap.pug
