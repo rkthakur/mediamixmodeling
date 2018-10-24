@@ -20,7 +20,9 @@ dependentVariable ="Sales"
 features = "TV + Radio + Newspaper"
 # Connect mongodb
 client = MongoClient()
-client = MongoClient("mongodb://localhost:27017/")
+config = json.loads(open('./config.json').read())
+#client = MongoClient("mongodb://localhost:27017/mediamixmodeling")
+client = MongoClient(config['dburl'])
 db = client.mediamixmodeling
 #uid = datetime.now().strftime("%Y%m%d%H%M%S%Z")
 
@@ -28,21 +30,28 @@ LOG_FILENAME = './logs/LinearRegression.log'
 #FORMAT = '%(asctime)-15s %(clientip)s %(user)-8s %(message)s'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 logging.info('Initialization done...')
-uid="10207145251097586"
+uid="10207169892833614"
 SampaleData=uid+"_Data"
+
 #load Sample date for media mix modeling
 def getDataForModeling(uid):
     SampleData=uid+"_Data"
-    data = pd.DataFrame(list(db[SampleData].find()))
+    data1 = pd.DataFrame(list(db[SampleData].find({},{'_id':0,'TDate':0})))
+    # This is a temporary solution to avoid 'ValueError: shapes (366,181) and (366,181) not aligned: 181 (dim 1) != 366 (dim 0)' #
+    # Looks like statsmodels 0.9.0 version has an issue in handling dataframe originated from a List while summarizing the regression model #
+    # Therefore data fetched from MongoDB is getting sevaed in a temporary CSV file #
+    data1.to_csv('./mongodata.csv')
+    data = pd.read_csv('./mongodata.csv')
+    #data.to_csv('/Users/rakthaku/CodeRepos/mediamixmodeling/SampleDataSet/filedata.csv')
     return data
 
 def runModel(data):
     # read data into a DataFrame
     # create a fitted model with all three features - Ordinary Least Squares
-    lm = smf.ols(formula=dependentVariable+" ~ "+features, data=data).fit()
+    lm1 = smf.ols(formula=dependentVariable+" ~ "+features, data=data)
+    lm = lm1.fit()
     # Summarize the model
     lm.summary()
-
     return lm
 
 # Transform Model to json
@@ -127,7 +136,7 @@ def runLinearRegression(uid):
     return model
 
 def main():
-    runLinearRegression('10207145251097586')
+    runLinearRegression('10207169892833614')
 
 if __name__ == '__main__':
     main()
