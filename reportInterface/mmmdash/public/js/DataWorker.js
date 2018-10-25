@@ -1,5 +1,5 @@
 ﻿(function () {
-  var dataWs = new WebSocket("ws://www.dev-romimate.com:8088/dataAnalysis");
+  var dataWs = new WebSocket("ws://dev-romimate.com:8088/dataAnalysis");
   if(location.host == "www.romimate.com" || location.host == "romimate.com")
      dataWs = new WebSocket("ws://www.romimate.com/dataAnalysis");
 
