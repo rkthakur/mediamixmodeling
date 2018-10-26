@@ -5,7 +5,7 @@
         MMMDash.userDataCollectionName = req.session.passport.user.id + "_Data";
         MMMDash.userMixModelCollectionName = req.session.passport.user.id + "_MixModel";
 
-        MMMDash.db.connectionObj.db.collectionNames(function (err, names) {
+       MMMDash.db.connectionObj.db.listCollections().toArray(function (err, names) {
           MMMDash.db.connectionObj.collection('UserDataRepository').update({ "_id": req.session.passport.user.id }, req.session.passport.user, function (err, result) {
   		           if (err) {console.log("Error while user profile update : "+err);}
                  //console.log("Response of user profile update"+result);
