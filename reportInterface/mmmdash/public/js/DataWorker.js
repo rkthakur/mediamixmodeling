@@ -39,7 +39,7 @@
             setTimeout(function () {
                 $.ajax({
                     url: "/api/doDataRefresh",
-                    async: false,
+                    async: true,
                     type: "POST",
                     success: function (res) {
                         //alert("Data refreshed successful");
@@ -65,7 +65,7 @@ $(document).ready(function () {
         setTimeout(function () {
             $.ajax({
                 url: "/api/doDataRefresh",
-                async: false,
+                async: true,
                 type: "POST",
                 success: function (res) {
                     //alert("Data refreshed successful");
