@@ -266,7 +266,8 @@ app.get('/login/twitter/return', passport.authenticate('twitter', { failureRedir
         request(requestURL, function (error, response, body) {
             MMMDash.IsDataDirty = false;
             //console.log("doDataRefresh isSuccessful=>", response);
-            if (response.statusCode != 200) {
+            if (response === undefined || response.statusCode === undefined || response.statusCode != 200){
+            //if (response.statusCode != 200) {
               console.log(error);
               MMMDash.IsDataDirty = true;
               res.statusCode = 503;
