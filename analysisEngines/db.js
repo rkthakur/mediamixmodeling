@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-var connString = 'mongodb://demo:demo123@13.71.4.127:27017/mediamixmodeling?authSource=mediamixmodeling&w=1';
-//var connString = 'mongodb://localhost:27017/mediamixmodeling';
+var connString = 'mongodb://localhost:27017/mediamixmodeling';
 module.exports = MMMDash.db = {
     connectionString: connString,
     connectionObj: mongoose.createConnection(connString),
