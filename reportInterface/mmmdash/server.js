@@ -4,13 +4,22 @@
     //var bson = require('./node_modules/mongodb/node_modules/mongodb-core/node_modules/bson/lib/bson')
     var express = require('express');
     var app = express();
+
+    /*** Implement HTTPS ***/
+    const https = require('https');
+    const fs = require('fs');
+    const options = {
+      key: fs.readFileSync('./SSL/private.key'),
+      cert: fs.readFileSync('./SSL/certificate.crt')
+    };
+    /*** Implement HTTPS ***/
     var expressWs = require('express-ws')(app);
     var mongoose = require('mongoose');
     var bodyParser = require('body-parser');
     var methodOverride = require('method-override');
     var session = require("express-session");
     db = require('./config/db');
-    var fs = require("fs");
+    //var fs = require("fs");
     var multer = require("multer");
     var Converter = require("csvtojson").Converter;
 
@@ -46,7 +55,9 @@
     require('./app/routes')(app, MMMDash); // pass our application into our routes
 
     // start app ===============================================
-    app.listen(port);
+    //app.listen(port);
+    https.createServer(options, app).listen(443)
+
     console.log('Magic happens on port ' + port);
 
 

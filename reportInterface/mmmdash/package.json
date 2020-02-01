@@ -17,6 +17,7 @@
     "express-session": "^1.14.1",
     "express-ws": "^2.0.0",
     "fs": "0.0.1-security",
+    "https": "^1.0.0",
     "method-override": "^3.0.0",
     "mongodb": "^2.2.9",
     "mongoose": "^5.3.5",
