@@ -9,8 +9,9 @@
     const https = require('https');
     const fs = require('fs');
     const options = {
-      key: fs.readFileSync('./SSL/private.key'),
-      cert: fs.readFileSync('./SSL/certificate.crt')
+      /** As per Certbot-auto setup, all certificate details goes into /etc/letsencrypt/live/romimate.com that will get auto renuwed by a corn job */
+      key: fs.readFileSync('/etc/letsencrypt/live/romimate.com/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/romimate.com/cert.pem')
     };
     /*** Implement HTTPS ***/
     var expressWs = require('express-ws')(app);
