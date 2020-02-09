@@ -1,9 +1,9 @@
 ﻿(function () {
     var dataWs ="";
     if(location.host == "dev-romimate.com" || location.host == "dev-romimate.com")
-        dataWs = new WebSocket("ws://dev-romimate.com:8088/dataAnalysis");
+        dataWs = new WebSocket("wss://dev-romimate.com:8088/dataAnalysis");
     if(location.host == "www.romimate.com" || location.host == "romimate.com")
-     dataWs = new WebSocket("ws://www.romimate.com/dataAnalysis");
+     dataWs = new WebSocket("wss://www.romimate.com/dataAnalysis");
 
     dataWs.onclose = function (event) {
         console.log(event);

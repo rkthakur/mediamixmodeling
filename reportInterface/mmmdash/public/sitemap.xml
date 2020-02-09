@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://www.romimate.com</loc>
+<loc>https://www.romimate.com</loc>
 </url>
 <url>
-<loc>http://www.romimate.com/#dashboard</loc>
+<loc>https://www.romimate.com/#dashboard</loc>
 </url>
 <url>
-<loc>http://www.romimate.com/#about</loc>
+<loc>https://www.romimate.com/#about</loc>
 </url>
 <url>
-<loc>http://www.romimate.com/#section1detail</loc>
+<loc>https://www.romimate.com/#section1detail</loc>
 </url>
 <url>
-<loc>http://www.romimate.com/#section2detail</loc>
+<loc>https://www.romimate.com/#section2detail</loc>
 </url>
 <url>
-<loc>http://www.romimate.com/#section3detail</loc>
+<loc>https://www.romimate.com/#section3detail</loc>
 </url>
 <url>
-<loc>http://www.romimate.com/#news</loc>
+<loc>https://www.romimate.com/#news</loc>
 </url>
 <url>
-<loc>http://www.romimate.com/#commit</loc>
+<loc>https://www.romimate.com/#commit</loc>
 </url>
 <url>
-<loc>http://www.romimate.com/#contact</loc>
+<loc>https://www.romimate.com/#contact</loc>
 </url>
 </urlset>

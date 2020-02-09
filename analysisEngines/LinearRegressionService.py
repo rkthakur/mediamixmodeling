@@ -7,6 +7,8 @@
 
 from LinearRegression import runLinearRegression
 import http.server
+# Support for SSL #
+import ssl
 import socketserver
 #from urllib.parse import urlparse
 from urllib.parse import parse_qs, urlparse
@@ -41,6 +43,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 
 try:
     server = http.server.HTTPServer(('', PORT), MyHandler)
+    server.socket = ssl.wrap_socket (httpd.socket,keyfile="path/to/key.pem",certfile='path/to/cert.pem', server_side=True)
     print('Started http server')
     server.serve_forever()
 except KeyboardInterrupt:
