@@ -43,7 +43,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 
 try:
     server = http.server.HTTPServer(('', PORT), MyHandler)
-    server.socket = ssl.wrap_socket (httpd.socket,keyfile="path/to/key.pem",certfile='path/to/cert.pem', server_side=True)
+    server.socket = ssl.wrap_socket (server.socket,keyfile="path/to/key.pem",certfile='path/to/cert.pem', server_side=True)
     print('Started http server')
     server.serve_forever()
 except KeyboardInterrupt:
