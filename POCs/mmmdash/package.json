@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "dependencies": {
     "express" : "~4.5.1",
-	"mongoose" : "~3.8.0",
+	"mongoose" : "~5.8.11",
 	"body-parser" : "~1.4.2",
 	"method-override" : "~2.0.2"
   }
