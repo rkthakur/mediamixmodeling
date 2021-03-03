@@ -30,7 +30,7 @@
     "passport-linkedin": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "path": "^0.12.7",
-    "pug": "^2.0.0-beta6",
+    "pug": "^3.0.1",
     "request": "^2.75.0",
     "serve-favicon": "^2.3.0",
     "ws": "^1.1.1"
