@@ -9,11 +9,11 @@
   },
   "author": "Rakesh Thakur",
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "csvtojson": "^1.0.2",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "express-session": "^1.14.1",
     "express-ws": "^2.0.0",
     "fs": "0.0.1-security",
